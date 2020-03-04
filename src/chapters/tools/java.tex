@@ -1,0 +1,46 @@
+\section{java命令}
+\label{chap:tools_java}
+
+Launches a Java application.
+
+\begin{lstlisting}[language=cshell]
+
+    java [options] classname [args]
+
+    java [options] -jar filename [args]
+
+\end{lstlisting}
+
+通过启动JRE来调用指定的类，调用此类的main()方法。
+\begin{lstlisting}[language=Java]
+    public static void main(String[] args)
+\end{lstlisting}
+
+\subsection{选项} 
+
+
+\begin{itemize}
+    \item   标准选项
+    \item   非标准选项 
+    \item   高级运行时选项      （Advanced Runtime Options）
+    \item   高级JIT编译器选项   （Advanced JIT Compiler Options）
+    \item   高级可维护性选项    （Advanced Serviceability Options）
+    \item   高级垃圾收集选项    （Advanced Garbage Collection Options）
+\end{itemize}
+
+
+
+\subsubsection{标准选项} 
+
+Java虚拟机（JVM）的所有实现都保证支持的标准选项。
+
+
+* -agentlib:libname[=options]
+
+加载指定的本机代理库。在库名之后，可以使用特定于库的以逗号分隔的选项列表。
+
+
+
+
+
+

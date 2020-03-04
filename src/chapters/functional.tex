@@ -1,0 +1,52 @@
+函数式接口
+
+关于函数式接口
+
+如果一个接口只有一个抽象方法，那么该接口就是一个函数式接口
+
+如果我们在某个接口上声明了FunctionalInterface注解，那么编译器就会按照函数式接口的定义来要求该接口
+
+如果某个接口只有一个抽象方法，但我们并没有给该接口声明FunctionalInterface注解，那么编译器依旧会将该接口看作是函数式接口
+
+\begin{lstlisting}[style=cjava]
+    List<Integer> list = Arrays.asList(1,2,3,4,5);
+
+    list.forEach(new Consumer<Integer>(){
+        @Override
+        public void accept(Integer integer){
+            System.out.println(integer);
+        }
+    });
+\end{lstlisting}
+
+在java中Lambda表达式是对象，他们必须依附与一类特别的对象类型-函数式接口（functional interface)
+
+That instances of functional interfaces can be created with lambda expressions, method references, or constructor references.
+
+函数式接口的实例可以通过lambda表达式，方法引用和构造函数引用创建。
+
+
+外部迭代和内部迭代
+
+Java lambda表达式是一种匿名函数；它是没有声明的方法，即没有访问修饰符，返回值声明和名字。
+
+lambda操作符： ->
+lambda左边：接口中抽象方法的形参列表
+lamdba右边：重写抽象方法的方法体
+
+
+当只有一个参数，并且类型可推导时，圆括号（）可省略。例如: a-> return a*a
+
+lambda 表达式的主体可包含零条或多条语句
+
+如果lambda表达式的主体只有一条语句，花括号{} 可省略。匿名函数的返回类型与该主体表达式一致
+
+如果Lambda表达式的主体包含一条以上语句，则表达式必须包含在花括号{}中。匿名函数的返回类型与代码块的返回类型一致，若没有返回值则为空
+
+
+
+Function<T, R>
+ 
+BiFunction<T, U, R>
+
+

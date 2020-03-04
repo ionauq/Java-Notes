@@ -1,0 +1,32 @@
+
+使用maven创建项目编译时报 Error:java: Compilation failed: internal java compiler error
+
+设置Intellij IDEA编辑器 Java Compiler 栏目 Project bytecode version 和项目的Target bytecode version 
+
+以及Project Settings栏目的项目 Language level。
+
+或者在pom.xml添加
+
+
+<properties>
+  <maven.compiler.source>1.8</maven.compiler.source>
+  <maven.compiler.target>1.8</maven.compiler.target>
+</properties>
+
+或者
+
+<plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-compiler-plugin</artifactId>
+<version>3.8.1</version>
+<configuration>
+  <source>1.8</source>
+  <target>1.8</target>
+</configuration>
+</plugin>
+
+详细内容查看http://maven.apache.org/plugins/maven-compiler-plugin/
+
+
+
+

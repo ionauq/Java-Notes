@@ -1,0 +1,47 @@
+Anonymous Inner Class
+
+It is an inner class without a name and for which only a single object is created.
+An anonymous inner class can be useful when making an instance of an object with certain “extras” such as overloading methods of a class or interface, without having to actually subclass a class.
+
+
+are mainly created in two ways:
+
+. Class (abstract or concrete)
+. interface
+
+The syntax of an anonymous class expression is like the invocation of a constructor, except that there is a class definition contained in a block of code.
+匿名类表达式的语法类似于调用构造函数，只是在代码块中包含了一个类定义。
+
+匿名内部类的创建格式
+
+\begin{lstlisting}[style=cjava]
+    new class(arguments) | interface()
+    {
+        //匿名内部类的类体部分
+    }
+\end{lstlisting}
+
+okHttp中匿名类示例
+
+\begin{lstlisting}[style=cjava]
+    public abstract class Internal {
+        public abstract void addLenient(Headers.Builder builder, String line);
+    }
+
+    Internal.instance = new Internal() {
+        @Override public void addLenient(Headers.Builder builder, String line) {
+        builder.addLenient(line);
+        }
+    }
+\end{lstlisting}
+
+
+Difference between Normal/Regular class and Anonymous Inner class:
+
+A normal class can implement any number of interfaces but anonymous inner class can implement only one interface at a time.
+A regular class can extend a class and implement any number of interface simultaneously. But anonymous Inner class can extend a class or can implement an interface but not both at a time.
+For regular/normal class, we can write any number of constructors but we cant write any constructor for anonymous Inner class because anonymous class does not have any name and while defining constructor class name and constructor name must be same.
+
+
+
+

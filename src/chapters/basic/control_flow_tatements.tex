@@ -1,0 +1,81 @@
+
+switch 语句
+
+Java
+
+只支持(byte,short,char,int)基本类型,Enum类型以及String,Character,Byte,Short和Integer类。
+
+只支持常量表达式。
+
+case会进行整数范围验证。
+
+\begin{lstlisting}[style=cjava,caption={swtich},label=useless]
+    /*
+    * 枚举类型
+    */
+    public enum Day {
+        SUNDAY, MONDAY, TUESDAY, WEDNESDAY,
+        THURSDAY, FRIDAY, SATURDAY 
+    }
+
+    /*
+    * 星期判断
+    * @param day
+    */
+    public static void switchTestWithEnum(Day day) {
+    switch (day) {
+        case MONDAY:
+            System.out.println("Today is Mondays.");
+            break;
+        default:
+            System.out.println("Today is ...");
+            break;
+        }
+   }
+
+    public static void switchTestWithCharacter(Character character) {
+        switch (character) {
+            case 'a':
+                System.out.println("character is a");
+                break;
+            case 'b':
+                System.out.println("character is b");
+            default:
+                System.out.println("nothing...");
+        }
+    }
+
+    //调用
+    switchTestWithEnum(Day.SUNDAY);
+    switchTestWithCharacter(new Character('a'));
+\end{lstlisting}
+
+PHP
+
+case 表达式可以是任何求值为简单类型的表达式，即整型或浮点数以及字符串。不能用数组或对象，除非它们被解除引用成为简单类型。
+
+允许使用分号代替 case 语句后的冒号
+
+case比较执行的是松散比较 ==
+
+ \begin{lstlisting}[language=php]
+    $beer = 'caseC';
+    $a ='caseA';
+
+    switch($beer)
+    {
+	    case $a;
+		    echo "this is caseA";
+		break;
+	    case 'caseB';
+		    echo "this is caseB";
+		break;
+	    case 'case'.'C':
+	        echo "this is caseC";
+	    break;
+        default;
+            echo 'Please make a new selection...';
+        break;
+    }
+\end{lstlisting}
+    

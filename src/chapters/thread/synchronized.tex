@@ -1,0 +1,111 @@
+\section{synchronized}
+\label{chap:synchronized}
+
+JDK为什么要设计synchronized?
+
+多线程编程中，有可能出现多个线程同时访问同一个共享的，可变资源的情况。这种资源可能是对象、变量、文件等。
+
+\textbf{共享}:  资源可以由多个线程同时访问
+
+\textbf{可变}： 资源可以在起生命周期内被修改
+
+引出的问题：
+
+由于线程执行的过程是不可控的，所以需要采用同步机制来协同对对象可变状态的访问
+
+
+加锁的目的：
+
+序列号访问临界资源，即同一时刻只能有一个线程访问临界资源（同步互斥访问）
+
+
+\notebox{
+    synchronized 属于隐式锁 \par
+    隐式锁：不需要自己通过写代码取加锁跟解锁
+}
+
+synchronized使用与实现
+
+使用方式
+
+\begin{itemize}
+    \item 同步实例方法，锁是当前实例对象
+    \item 同步类方法，锁是当前类对象
+    \item 同步代码块， 锁是括号里面的对象
+\end{itemize}
+
+
+实现方式
+
+synchronized 是JVM内置锁，通过内部对象Monitor(监视器锁)实现，基于进入与退出Monitor对象实现方法与代码块同步。监视器锁的实现依赖底层操作系统的Mutex lock（互斥锁）实现。
+
+JVM对象加锁原理
+
+认识对象的内存结构
+
+oop.hpp
+
+\href{https://gist.github.com/arturmkrtchyan/43d6135e8a15798cc46c}{Object Header}
+
+
+#TODO:
+
+
+> 实例对象内存存储是怎样的？
+> 对象的实例存在堆区，对象元数据存在元空间（方法区），对象的引用存在与栈空间
+
+
+锁的种类
+
+
+JDK1.6之前是重量级锁，之后对synchronized对实现进行了优化，如适应性自旋锁，轻量级锁和偏向锁。默认开启偏向锁。
+
+开启偏向锁: -XX:+UseBiasedLocking -XX:BiasedLockingStartupDelay=0
+
+锁的升级过程
+
+
+无锁 -> 偏向锁 -> 轻量级锁  -> 重量级锁
+
+
+为什么不直接上重量级锁
+
+上重量级锁会涉及到线程上下文切换？线程上下文切换会涉及到操作系统用户态到内核态的切换。
+
+
+
+JVM 原子操作
+
+lock,read,load,use,assign,store,write,unlock
+
+
+read： 读取，从主内存读取数据
+
+load： 载入，将主内存读取到的数据写入工作内存
+
+use： 使用 从工作内存读取数据来计算
+
+assign： 赋值 将计算好的值重新赋值到工作内存中
+
+store： 存储 将工作内存数据写入主内存
+
+write: 写入 将store过去的变量值赋值给主内存中的变量
+
+lock： `锁定` 将主内存变量加锁，标识为线程独占状态
+
+unlock: `解锁` 将主内存变量解锁，解锁后其他线程可以锁定该变量
+
+
+
+
+MESI缓存一致协议
+
+
+
+
+
+
+
+
+https://www.slideshare.net/cnbailey/memory-efficient-java
+

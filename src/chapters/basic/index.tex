@@ -1,0 +1,385 @@
+\chapter{基本概念}
+\label{chap:base}
+
+\section{基础知识}
+
+官方文档   
+
+\href{https://docs.oracle.com/en/java/}{Java Documentation}
+\newline
+
+\subsection{常用术语}
+
+JDK:  \menlo{Java Development Kit}  \par
+~ 编写java程序的程序员使用的软件
+
+JRE:  \menlo{Java Runtime Environment}  \par
+~ 运行java程序的用户使用的软件
+
+Server JRE:  \par
+~ 在服务器上运行java程序的软件
+
+SE:  \menlo{Standard Edition}  \par
+~ 用于桌面或者简单服务器应用的java平台
+
+EE:  \menlo{Enterprise Edition}  \par
+~ 用于复杂服务器应用的java平台 
+
+ME: \menlo{Micro Edition}  \par
+~ 用于手机和其他小型设备的java平台  
+
+Java FX:  \par
+~ 用于图形化用户界面的一个替代工具包在Oracle的Java SE发布版本中提供
+
+OpenJDK:  \par
+~ Java SE的一个免费开源实现,不包含浏览器集成或者JavaFX 
+
+JCP:  \menlo{Java Community Process}  \par
+~ Java社区进程
+
+JSR:  \menlo{Java Specification Requests}  \par
+~ Java规范请求 由JCP成员向委员会提交的Java发展议案，经过一系列流程后，如果通过最终会体现在未来的Java中
+
+TCK:  \menlo{Technology Compatibility Kit}  \par
+~ 技术兼容性测试
+
+\subsection{Java版本}
+
+Java SE是相对于Java EE 和 Java ME，它是Java的标准版。
+
+Java SE8 对应“内部”版本号是1.8.0。\newline
+
+版本号命名规则示例：
+
+\menlo{Java SE 8u31}
+
+~ Java SE 8的第31次更新，内部版本号为1.8.0\_31
+
+\subsection{JDK安装}
+
+Mac可以通过 dmg 文件包安装
+
+安装后相关路径
+
+\begin{lstlisting}[style=cshell]
+
+/Library/Java/JavaVirtualMachines/jdk-*.jdk/Contents/Home/
+
+/usr/libexec/java_home
+
+/Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/
+
+# 执行目录
+/usr/bin/java
+
+# 库源文件为压缩文件src.zip
+/Library/Java/JavaVirtualMachines/jdk-*.jdk/Contents/Home/lib/src.zip
+
+\end{lstlisting}
+
+
+src.zip 文件包含了所有的公共类的源代码。
+
+
+\subsection{Java Tools}
+
+
+* \textbf{javac}
+
+~ You can use the javac tool and its options to read Java class and interface definitions and compile them into bytecode and class files.
+
+~ 您可以使用javac工具及其选项来读取Java类和接口定义，并将它们编译成字节码和类文件。
+
+* \textbf{javap}
+
+~ You use the javap command to disassemble one or more class files.
+
+~ 您可以使用javap命令来反汇编一个或多个类文件。
+
+\hypersetup{linkcolor=blue}
+
+~ 具体使用可参照 \textcolor[rgb]{0,0,1}{\ref{chap:tools_javap}} javap章节
+
+* \textbf{javadoc}
+
+~ You use the javadoc tool and its options to generate HTML pages of API documentation from Java source files.
+
+~ 您可以使用javadoc工具及其选项从Java源文件生成API文档的HTML页面。
+
+* \textbf{java} 
+
+~ You can use the java command to launch a Java application.
+
+~ 您可以使用java命令启动java应用程序。
+
+~ 具体使用可参照 \textcolor[rgb]{0,0,1}{\ref{chap:tools_java}} java章节
+
+* \textbf{appletviewer}
+
+~ You use the appletviewer command to launch the AppletViewer and run applets outside of a web browser.
+
+~ 您可以使用appletviewer命令启动appletviewer并在web浏览器之外运行applet。
+
+* \textbf{jar}
+
+~ You can use the jar command to create an archive for classes and resources, and to manipulate or restore individual classes or resources from an archive.
+
+~ 您可以使用jar命令为类和资源创建存档，并从存档中操作或还原单个类或资源。
+
+* \textbf{jlink}
+
+~ You can use the jlink tool to assemble and optimize a set of modules and their dependencies into a custom runtime image.
+
+~ 您可以使用jlink工具将一组模块及其依赖项组装并优化到自定义运行时映像中。
+
+* \textbf{jmod}
+
+~ You use the jmod tool to create JMOD files and list the content of existing JMOD files.
+
+~ 使用jmod工具创建JMOD文件并列出现有JMOD文件的内容。
+
+* \textbf{jdeps} 
+
+~ You use the jdeps command to launch the Java class dependency analyzer.
+
+~ 使用jdeps命令启动Java类依赖关系分析器。
+
+* \textbf{jdeprscan} 
+
+~ You use the jdeprscan tool as a static analysis tool that scans a jar file (or some other aggregation of class files) for uses of deprecated API elements.
+
+~ 您可以使用jdeprscan工具作为静态分析工具，它扫描一个jar文件(或一些其他类文件的聚合)，以便使用废弃的API元素。
+
+* \textbf{jshell}
+
+~ You use the jshell tool to interactively evaluate declarations, statements, and expressions of the Java programming language in a read-eval-print loop (REPL).
+
+~ 您可以使用jshell工具在read-eval-print循环(REPL)中交互式地计算Java编程语言的声明、语句和表达式。
+
+* \textbf{jconsole} 
+
+~ You use the jconsole command to start a graphical console to monitor and manage Java applications.
+
+~ 您可以使用jconsole命令启动图形化控制台来监视和管理Java应用程序。
+
+* \textbf{jmc} 
+
+~ You use the jmc command and its options to launch Java Mission Control. Java Mission Control is a profiling, monitoring, and diagnostics tools suite.
+
+~ 使用jmc命令及其选项启动Java任务控制。Java任务控制是一个分析、监视和诊断工具套件。        
+
+* \textbf{jps}
+
+~ Experimental You use the jps command to list the instrumented JVMs on the target system.
+
+~ 实验性。您可以使用jps命令列出目标系统上已检测的jvm。
+
+* \textbf{jstat} 
+
+~ Experimental You use the jstat command to monitor JVM statistics. 
+
+~ 实验性。使用jstat命令监视JVM统计数据。此命令是实验性的，不受支持。
+
+* \textbf{jstatd} 
+
+~ Experimental You use the jstatd command to monitor the creation and termination of instrumented Java HotSpot VMs. 
+
+~ 实验性。您可以使用jstatd命令监视仪表化Java HotSpot vm的创建和终止。
+
+* \textbf{jmap}
+
+~ Experimental You use the jmap command to print details of a specified process. 
+
+~ 实验性。您可以使用jmap命令打印指定进程的详细信息。
+
+* \textbf{jstack}
+
+~ Experimental You use the jstack command to print Java stack traces of Java threads for a specified Java process. 
+
+~ 实验性。您可以使用jstack命令为指定的Java进程打印Java线程的Java堆栈跟踪。\newline
+
+\notebox{
+    更详细的内容请参考    \par 
+    \href{https://docs.oracle.com/en/java/javase/11/tools/tools-and-command-reference.html}{tools-and-command-reference}
+}
+
+
+\subsection{规范}
+
+\textbf{Java区分大小写}
+
+Java采用骆驼命名法，CamelCase。
+
+\textbf{数据类型}
+
+Java包含8种基本类型。\par
+\begin{itemize}
+        \item   4种整型
+        \item   2种浮点类型 
+        \item   1种表示Unicode编码的字符单元的字符类型char
+        \item   1种表示真值的boolean类型
+\end{itemize}
+
+
+\textbf{整型}
+
+\renewcommand\arraystretch{2}
+\begin{tabular}{l|l|l}
+    类型        &      存储需求        &     取值范围        \\               \hline
+    byte       &       1字节          & -128 $\sim$ 127     \\
+    short      &       2字节          & -32768 $\sim$ 32767  \\
+    int        &       4字节          &  -2147483648 $\sim$ 2147483647  \\
+    long       &       8字节          &  -9223372036854775808 $\sim$ 9223372036854775807  \\
+\end{tabular}\newline
+
+\notebox{Java 没有任何无符号（unsigned）形式的整型。}
+
+长整型值有一个后缀l或者L。
+
+\begin{lstlisting}[style=cjava]
+        long number = 123L;             // number值为：123
+\end{lstlisting}
+
+十六进制带前缀0x或者0X
+
+\begin{lstlisting}[style=cjava]
+        int number = 0x123;       
+\end{lstlisting}
+
+八进制带前缀0
+
+从Java7:
+
+* 加上前缀0b或者0B就可以写二进制数。
+
+\begin{lstlisting}[style=cjava]
+        int number = 0b100;             // number值为：4
+\end{lstlisting}
+
+* 为数字加下划线，Java编译器会去除这些下划线
+
+\begin{lstlisting}[language=java]
+        Sytem.out.println(0_1_0);       // 010表示八进制，输出8
+\end{lstlisting}
+
+
+\cautionbox{
+注意JS INT类型的值范围:
+\begin{itemize}
+        \item   \href{http://speakingjs.com/es5/ch11.html}{Integers in JavaScript} 
+        \item   \href{http://speakingjs.com/es5/ch11.html\#safe\_integers}{Safe Integers}
+        \end{itemize}
+}
+
+
+\textbf{浮点数}
+
+
+\renewcommand\arraystretch{2}
+\begin{tabular}{l|l|l}
+    类型         &      存储需求        &     取值范围        \\               \hline
+    float        &       4字节          & 有效位数为6-7位      \\
+    double      &       8字节          & 有效位数为15位       \\
+\end{tabular}\newline
+
+
+float类型的值要有后缀f或者F。没有后缀默认为double类型。
+
+double类型也可以添加d或者D后缀。
+
+
+用于表示溢出或者出错情况的三个特殊浮点值：
+
+\begin{itemize}
+        \item   正无穷大  
+        \item   负无穷大
+        \item   NaN （不是一个数字）
+\end{itemize}
+
+例如: 一个正整数除以 0 的结果为正无穷大； 计算 0/0或者负数的平方根结果为NaN。
+
+对应常量为:
+\begin{lstlisting}[language=java]
+        // float
+        Float.POSITIVE_INFINITY;
+        Float.NEGATIVE_INFINITY;
+        Float.NaN;
+        // double
+        Double.POSITIVE_INFINITY;
+        Double.NEGATIVE_INFINITY;
+        Double.NaN;
+\end{lstlisting}
+
+
+所有“非数值”的值都认为是不相同的。
+
+\begin{lstlisting}[language=java]
+        if(Double.isNaN(x))   // check whether x is "not a number"
+\end{lstlisting}
+
+
+
+
+
+
+
+
+
+
+\textbf{char类型}
+
+
+
+常量
+
+关键字final
+
+类常量关键字 static final
+
+ava类中各成员初始化顺序
+
+
+基类静态代码块、基类静态成员字段并列优先级，按照代码中出现先后顺序执行（只有第一次加载类时执行）
+
+派生类静态代码块、派生类静态成员字段并列优先级，按照代码中出现先后顺序执行（只有第一次加载类时执行）
+
+基类普通代码块、基类普通成员字段并列优先级，按照代码中出现先后顺序执行
+
+基类构造函数
+
+派生类普通代码块、派生类普通成员字段并列优先级，按照代码中出现顺序执行
+
+派生类构造函数
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

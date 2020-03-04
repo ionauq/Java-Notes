@@ -1,0 +1,34 @@
+\input{preamble}
+ 
+\title{\bf Java学习笔记}                                                      % Supply information
+\author{白水}                                                                % for the title page.
+\date{\today}                                                               % Use current date. 
+
+\begin{document}
+\input{titlepage}
+
+\frontmatter                                                                % End of preamble, start of text.
+
+\tableofcontents
+
+\mainmatter
+
+\part{Java基础知识}
+\include{chapters/basic/index}
+\include{chapters/basic/control_flow_tatements}
+\include{chapters/inner_class}
+\include{chapters/initialization}
+\include{chapters/static}
+\include{chapters/generics}
+\include{chapters/functional}
+\include{chapters/exception}
+\include{chapters/thread/thread}
+\include{chapters/jdbc}
+
+\include{chapters/tools/index}
+\input{chapters/tools/javap}
+\input{chapters/tools/java}
+\include{chapters/memory/memory}
+\include{chapters/ipv6}
+\include{chapters/latex/latex}
+\end{document}                                                            % The required last line

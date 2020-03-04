@@ -1,0 +1,91 @@
+## maven
+
+### maven 安装
+
+MAVEN_OPTS 环境变量
+
+```
+
+MAVEN_OPTS = -Xms128m -Xmx512m
+
+```
+
+配置用户范围的settings.xml
+
+~/.m2/settings.xml
+
+POM Project Object Model 项目对象模型
+
+pom.xml
+
+核心元素
+
+groupId 定义项目属于那个组，往往和项目所在的组织或者公司存在关联
+
+artifactId 当前Maven项目在组中唯一的ID
+
+
+dependencies依赖项目
+
+scope依赖范围   test只对测试代码有效
+
+    compile 编译依赖范围
+    
+    test    测试依赖范围
+
+    provided 已提供依赖范围
+
+    runtime 运行时依赖范围
+
+    system 系统依赖范围
+
+    import 导入依赖范围
+    
+
+
+type 依赖的类型
+
+optional 标记依赖是否可选
+
+exclusions 用来排除传递性依赖
+
+
+Maven唯一坐标元素:groupId,artifactId,version
+
+packaging 可选
+
+classifier 
+
+
+packaging 定义Maven项目的打包方式，默认值是jar
+
+项目文件名 artifactId-version[classifier] .packaging
+
+
+mvn安装文件
+
+例如:
+
+```
+
+mvn install:install-file -Dfile=path/to/hello-world-1.0.jar -DgroupId=com.example.seonwater -DartifactId=hello-world -Dversion=1.0 -Dpackaging=jar
+
+```
+
+
+
+
+## 常见名词整理
+
+1. war和war exploded的区别
+2. java classpath参数的含义
+3. META-INF 文件夹的含义
+4. WEB-INF文件夹的含义
+5. jar，war，ear区别
+6. 
+
+
+
+
+
+
