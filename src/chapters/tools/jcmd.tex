@@ -1,0 +1,90 @@
+\section{jcmd命令}
+\label{chap:tools_jcmd}
+
+Sends diagnostic command requests to a running Java Virtual Machine (JVM).
+
+\begin{lstlisting}[language=cshell]
+
+    jcmd [-l|-h|-help]
+
+    jcmd pid|main-class PerfCounter.print
+
+    jcmd pid|main-class -f filename
+
+    jcmd pid|main-class command[ arguments]
+
+\end{lstlisting}
+
+
+jcmd工具向JVM发送诊断命令请求。必须在当前运行着JVM机器上执行，并且具有与JVM具有相同的user和group标识。
+
+运行jcmd不带参数或者使用 \-l 选项时,相当于jps (\textcolor[rgb]{0,0,1}{\ref{chap:tools_jps}}),会输出java进程标识符。
+
+如果将进程标识符(pid)或主类(main-class)作为第一个参数，则jcmd将诊断命令请求发送给具有指定标识符或发具有指定main-class名称的Java进程。
+
+如果使用0作为进程标识符，则会将诊断命令请求发送给所有可用的Java进程。
+
+
+* Perfcounter.print
+
+打印指定Java进程可用的性能计数器。性能计数器的列表可能因Java进程而异。
+
+
+* -f filename
+
+从文件中读取诊断命令。文件中每个命令必须单独一行。以\# 开头的命令会被忽略。如果命令行中包含\textcolor{codepurple}{stop}关键字则结束命令行读取。
+
+* command [arguments]
+
+要发送到指定Java进程的命令。可以通过向该进程发送\textcolor{codepurple}{help}命令来获得给定进程的可用诊断命令列表。
+
+如果参数中包含空格，则必须使用单引号或者双引号扩起来。注意使用转义字符($\backslash$)转义单/双引号。
+
+
+\begin{lstlisting}[language=cshell]
+
+   jcmd 15 help     # 15为java进程id
+
+    #### output ####
+
+    15:
+    The following commands are available:
+    JFR.stop
+    JFR.start
+    JFR.dump
+    JFR.check
+    VM.native_memory
+    VM.check_commercial_features
+    VM.unlock_commercial_features
+    ManagementAgent.stop
+    ManagementAgent.start_local
+    ManagementAgent.start
+    VM.classloader_stats
+    GC.rotate_log
+    Thread.print
+    GC.class_stats
+    GC.class_histogram
+    GC.heap_dump
+    GC.finalizer_info
+    GC.heap_info
+    GC.run_finalization
+    GC.run
+    VM.uptime
+    VM.dynlibs
+    VM.flags
+    VM.system_properties
+    VM.command_line
+    VM.version
+    help
+
+\end{lstlisting}
+
+\begin{lstlisting}[language=cshell]
+    jcmd 15 help GC.heap_info
+\end{lstlisting}
+
+
+
+
+
+

@@ -1,0 +1,79 @@
+\section{jps命令}
+\label{chap:tools_jps}
+
+Lists the instrumented Java Virtual Machines (JVMs) on the target system. 
+
+只适用于HotSpot虚拟机。
+
+\begin{lstlisting}[language=cshell]
+
+jps [ options ] [ hostid ]
+
+\end{lstlisting}
+
+hostid可以是进程的标识符或者类似于URL的 [protocol:][[//]hostname][:port][/servername] 地址
+
+如果jps命令没有指定hostid参数，那么工具只搜索本机运行的JVM。如果指定了hostid，那么他将通过指定的地址来搜索JVM。
+使用指定hostid的主机必须运行着jstatd进程。
+
+\subsection{选项} 
+
+\menlo{-q}
+
+只输出JVM标识符的列表，不输出类名、JAR文件名以及传递给main方法的参数。
+
+
+\menlo{-m}
+
+输出传递给mian方法的参数。嵌入式JVMS可能输出为空。
+
+
+\menlo{-l}
+
+输出应用程序主类的完整包名或应用程序JAR文件的完整路径名。
+
+\menlo{-v}
+
+输出传递给JVM的参数。
+
+\menlo{-V}
+
+只输出本地JVM标识符，不输出类名、JAR文件以及传递给main方法的参数。
+
+
+\menlo{-Joption}
+
+将选项传递给JVM，其中的选项是Java应用程序启动程序参考页面中描述的选项之一。例如，-J-Xms48m将启动内存设置为48 MB。
+
+
+
+输出格式：
+
+\begin{lstlisting}[language=cshell]
+
+lvmid [ [ classname | JARfilename | "Unknown"] [ arg* ] [ jvmarg* ] ]
+
+\end{lstlisting}
+
+
+
+示例：
+
+\begin{lstlisting}[language=cshell]
+jps
+
+    18027 Java2Demo.JAR
+    18032 jps
+    18005 jstat
+
+\end{lstlisting}
+
+
+\begin{lstlisting}[language=cshell]
+
+jps -m remote.domain:2002
+
+       3002 /opt/jdk1.7.0/demo/jfc/Java2D/Java2Demo.JAR
+       3102 sun.tools.jstatd.jstatd -p 2002
+
+    \end{lstlisting}

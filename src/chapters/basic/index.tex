@@ -77,18 +77,31 @@ Mac可以通过 dmg 文件包安装
 
 \end{lstlisting}
 
-
 src.zip 文件包含了所有的公共类的源代码。
 
+\subsubsection{设置环境变量}
 
-\subsection{Java Tools}
+设置JAVA\_HOME
 
+\begin{lstlisting}[style=cshell]
+        export JAVA_HOME="$(/usr/libexec/java_home -v 1.8.0_201)"       # 以版本1.8.0_201为例
+        export PATH=$JAVA_HOME/bin:$PATH
+\end{lstlisting}
+
+
+\section{Java Tools}
+
+\subsubsection{Create and Build Applications}
 
 * \textbf{javac}
 
 ~ You can use the javac tool and its options to read Java class and interface definitions and compile them into bytecode and class files.
 
 ~ 您可以使用javac工具及其选项来读取Java类和接口定义，并将它们编译成字节码和类文件。
+
+\hypersetup{linkcolor=blue}
+
+~ 具体使用可参照 \textcolor{blue}{\ref{chap:tools_javac}} javac章节
 
 * \textbf{javap}
 
@@ -100,12 +113,6 @@ src.zip 文件包含了所有的公共类的源代码。
 
 ~ 具体使用可参照 \textcolor[rgb]{0,0,1}{\ref{chap:tools_javap}} javap章节
 
-* \textbf{javadoc}
-
-~ You use the javadoc tool and its options to generate HTML pages of API documentation from Java source files.
-
-~ 您可以使用javadoc工具及其选项从Java源文件生成API文档的HTML页面。
-
 * \textbf{java} 
 
 ~ You can use the java command to launch a Java application.
@@ -114,29 +121,11 @@ src.zip 文件包含了所有的公共类的源代码。
 
 ~ 具体使用可参照 \textcolor[rgb]{0,0,1}{\ref{chap:tools_java}} java章节
 
-* \textbf{appletviewer}
-
-~ You use the appletviewer command to launch the AppletViewer and run applets outside of a web browser.
-
-~ 您可以使用appletviewer命令启动appletviewer并在web浏览器之外运行applet。
-
 * \textbf{jar}
 
 ~ You can use the jar command to create an archive for classes and resources, and to manipulate or restore individual classes or resources from an archive.
 
 ~ 您可以使用jar命令为类和资源创建存档，并从存档中操作或还原单个类或资源。
-
-* \textbf{jlink}
-
-~ You can use the jlink tool to assemble and optimize a set of modules and their dependencies into a custom runtime image.
-
-~ 您可以使用jlink工具将一组模块及其依赖项组装并优化到自定义运行时映像中。
-
-* \textbf{jmod}
-
-~ You use the jmod tool to create JMOD files and list the content of existing JMOD files.
-
-~ 使用jmod工具创建JMOD文件并列出现有JMOD文件的内容。
 
 * \textbf{jdeps} 
 
@@ -144,17 +133,13 @@ src.zip 文件包含了所有的公共类的源代码。
 
 ~ 使用jdeps命令启动Java类依赖关系分析器。
 
-* \textbf{jdeprscan} 
+* \textbf{javadoc}
 
-~ You use the jdeprscan tool as a static analysis tool that scans a jar file (or some other aggregation of class files) for uses of deprecated API elements.
+~ You use the javadoc tool and its options to generate HTML pages of API documentation from Java source files.
 
-~ 您可以使用jdeprscan工具作为静态分析工具，它扫描一个jar文件(或一些其他类文件的聚合)，以便使用废弃的API元素。
+~ 您可以使用javadoc工具及其选项从Java源文件生成API文档的HTML页面。
 
-* \textbf{jshell}
-
-~ You use the jshell tool to interactively evaluate declarations, statements, and expressions of the Java programming language in a read-eval-print loop (REPL).
-
-~ 您可以使用jshell工具在read-eval-print循环(REPL)中交互式地计算Java编程语言的声明、语句和表达式。
+\subsubsection{Monitor Java Applications}
 
 * \textbf{jconsole} 
 
@@ -162,17 +147,18 @@ src.zip 文件包含了所有的公共类的源代码。
 
 ~ 您可以使用jconsole命令启动图形化控制台来监视和管理Java应用程序。
 
-* \textbf{jmc} 
+* \textbf{jvisualvm}
 
-~ You use the jmc command and its options to launch Java Mission Control. Java Mission Control is a profiling, monitoring, and diagnostics tools suite.
 
-~ 使用jmc命令及其选项启动Java任务控制。Java任务控制是一个分析、监视和诊断工具套件。        
+\subsubsection{Monitor the JVM}
 
 * \textbf{jps}
 
 ~ Experimental You use the jps command to list the instrumented JVMs on the target system.
 
 ~ 实验性。您可以使用jps命令列出目标系统上已检测的jvm。
+
+~ 具体使用可参照 \textcolor[rgb]{0,0,1}{\ref{chap:tools_jps}} jps章节
 
 * \textbf{jstat} 
 
@@ -186,6 +172,26 @@ src.zip 文件包含了所有的公共类的源代码。
 
 ~ 实验性。您可以使用jstatd命令监视仪表化Java HotSpot vm的创建和终止。
 
+* \textbf{jmc} 
+
+~ You use the jmc command and its options to launch Java Mission Control. Java Mission Control is a profiling, monitoring, and diagnostics tools suite.
+
+~ 使用jmc命令及其选项启动Java任务控制。Java任务控制是一个分析、监视和诊断工具套件。        
+
+\subsubsection{Troubleshooting Tools}
+
+* \textbf{jcmd}
+
+~ You use the jcmd utility to send diagnostic command requests to a running Java Virtual Machine (JVM).
+
+* \textbf{jdb}
+
+~ You use the jdb command and its options to find and fix bugs in Java platform programs.
+
+* \textbf{jinfo}
+
+~ Experimental You use the jinfo command to generate Java configuration information for a specified Java process. 
+
 * \textbf{jmap}
 
 ~ Experimental You use the jmap command to print details of a specified process. 
@@ -198,13 +204,40 @@ src.zip 文件包含了所有的公共类的源代码。
 
 ~ 实验性。您可以使用jstack命令为指定的Java进程打印Java线程的Java堆栈跟踪。\newline
 
+\subsubsection{Others}
+
+* \textbf{jlink}
+
+~ You can use the jlink tool to assemble and optimize a set of modules and their dependencies into a custom runtime image.
+
+~ 您可以使用jlink工具将一组模块及其依赖项组装并优化到自定义运行时映像中。
+
+* \textbf{jmod}
+
+~ You use the jmod tool to create JMOD files and list the content of existing JMOD files.
+
+~ 使用jmod工具创建JMOD文件并列出现有JMOD文件的内容。
+
+* \textbf{jdeprscan} 
+
+~ You use the jdeprscan tool as a static analysis tool that scans a jar file (or some other aggregation of class files) for uses of deprecated API elements.
+
+~ 您可以使用jdeprscan工具作为静态分析工具，它扫描一个jar文件(或一些其他类文件的聚合)，以便使用废弃的API元素。
+
+* \textbf{jshell}
+
+~ You use the jshell tool to interactively evaluate declarations, statements, and expressions of the Java programming language in a read-eval-print loop (REPL).
+
+~ 您可以使用jshell工具在read-eval-print循环(REPL)中交互式地计算Java编程语言的声明、语句和表达式。
+
+
 \notebox{
     更详细的内容请参考    \par 
     \href{https://docs.oracle.com/en/java/javase/11/tools/tools-and-command-reference.html}{tools-and-command-reference}
 }
 
 
-\subsection{规范}
+\section{规范}
 
 \textbf{Java区分大小写}
 
@@ -316,12 +349,6 @@ double类型也可以添加d或者D后缀。
 \begin{lstlisting}[language=java]
         if(Double.isNaN(x))   // check whether x is "not a number"
 \end{lstlisting}
-
-
-
-
-
-
 
 
 

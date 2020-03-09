@@ -39,8 +39,29 @@ Java虚拟机（JVM）的所有实现都保证支持的标准选项。
 
 加载指定的本机代理库。在库名之后，可以使用特定于库的以逗号分隔的选项列表。
 
+如果指定 -agentlib:foo 选项，则JVM尝试加载位于由系统环境变量名为LD\_LIBRARY\_PATH（在OS X系统下变量名为 DYLD\_LIBRARY\_PATH）指定位置下的libfoo.so的库。
+
+下面的示例将展示如何加载堆分析工具(HPROF)库，并且获取堆栈深度为3，每20msCPU的简单采样信息：
+
+\begin{lstlisting}[language=cshell]
+
+    -agentlib:hprof=cpu=samples,interval=20,depth=3
+
+\end{lstlisting}  
+
+下面这个示例将展示如何加载Java调试线协议库并且监听8000端口的套接字连接，在主类加载之前挂起JVM:
+
+
+\begin{lstlisting}[language=cshell]
+
+    -agentlib:jdwp=transport=dt_socket,server=y,address=8000
+
+\end{lstlisting} 
 
 
 
+
+
+\-XX:+PrintStringTableStatistics
 
 

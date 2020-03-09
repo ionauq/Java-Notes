@@ -31,6 +31,7 @@
 \RequirePackage{xcolor}           % awesomebox依赖项
 \RequirePackage{xparse}           % awesomebox依赖项
 \RequirePackage{awesomebox}
+\RequirePackage{subfigure}
 
 
 % 加载字体
@@ -145,7 +146,7 @@
 \lstdefinelanguage{cshell}{
   language = {sh},
   style    = {defaultstyle},
-  morekeywords={git, php, cd, for, if, else, then, fi, echo, case, in,
+  morekeywords={git, php, cd, for, if, else, then, fi, echo, case, in, jcmd, java, jps, javac, javap, javadoc, jstat, jstatd
       elif, esac, for, do, done, tar, while, until, shift, configure,
       mv, mkdir, ;;, \$\#, \$1, \$2},
 }

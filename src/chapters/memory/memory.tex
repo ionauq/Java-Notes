@@ -1,12 +1,11 @@
 \chapter{内存模型}
+\label{chap:memory}
 
 \section{Java内存模型与线程}
  
-\subsection{}
-
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{parallel/amdahls-law-0.png}
+    \includegraphics[width=0.8\textwidth]{parallel/amdahls-law-0.png}
     \caption{Amdahl's Law 阿姆达尔定律}
 \end{figure}
 
@@ -74,17 +73,19 @@ T(2) = 0.4 + ( 1 - 0.4 ) / 2
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{parallel/amdahls-law-1.png}
-    \caption{并行因子=1}
+    \subfigure[并行因子=1]{
+        \label{P1}
+        \includegraphics[width=0.45\textwidth]{parallel/amdahls-law-1.png}}
+    \subfigure[并行因子=2]{
+        \label{P2}
+        \includegraphics[width=0.45\textwidth]{parallel/amdahls-law-2.png}}
+        \caption{并行因子分别为1，2时}
 \end{figure}
+
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{parallel/amdahls-law-2.png}
-    \caption{并行因子=2}
-\end{figure}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{parallel/amdahls-law-3.png}
+    \label{P3}
+    \includegraphics[width=0.8\textwidth]{parallel/amdahls-law-3.png}
     \caption{并行因子=3}
 \end{figure}
 

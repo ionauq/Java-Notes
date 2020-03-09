@@ -1,0 +1,111 @@
+\chapter{字符串}
+\label{chap:string}
+
+    Strings are constant; their values cannot be changed after they are created.
+
+\section{字符串对象}
+
+String对象是不可改变的，具有恒定性。
+
+在Java中String对象可以认为是char数组的延伸和进一步的封装。
+
+\begin{noteblock}
+    这里所说的char数组不是C语言意义上的字符型数组，而是大致类似于C语言中的 char* 指针。 \par
+    \begin{lstlisting}[style=cjava]
+    String str = "Java学习笔记"; 
+    \end{lstlisting}
+    \begin{lstlisting}[style=cjava]
+    char* str = "Java学习笔记";
+    \end{lstlisting}
+\end{noteblock}
+
+\begin{lstlisting}[style=cjava]
+
+    public final class String implements java.io.Serializable, Comparable<String>, CharSequence {
+
+    /** The value is used for character storage. */
+    private final char value[];
+
+    /*
+    * @param  value             Array that is the source of characters
+    * @param  offset            The initial offset
+    * @param  count             The length
+    *
+    * @throws  IndexOutOfBoundsException
+    *          If the {@code offset} and {@code count} arguments index
+    *          characters outside the bounds of the {@code value} array
+    */
+    public String(char value[], int offset, int count) {
+        if (offset < 0) {
+            throw new StringIndexOutOfBoundsException(offset);
+        }
+        if (count <= 0) {
+            if (count < 0) {
+                throw new StringIndexOutOfBoundsException(count);
+            }
+            if (offset <= value.length) {
+                this.value = "".value;
+                return;
+            }
+        }
+        // Note: offset or count might be near -1>>>1.
+        if (offset > value.length - count) {
+            throw new StringIndexOutOfBoundsException(offset + count);
+        }
+        this.value = Arrays.copyOfRange(value, offset, offset+count);
+    }
+
+    }
+
+\end{lstlisting}
+
+通过上面String类的实现代码可以发现String类和value数组都是final类型，这就保证了String对象的不变性。这种不变性可以带来极大的好处。
+
+\begin{itemize}
+    \item 保证对String对象的任意操作都不会改变原字符串
+    \item 意味着操作字符串不会出现线程同步问题
+    \item 成就了字符串驻留以及共享（常量池）
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
