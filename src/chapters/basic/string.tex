@@ -7,6 +7,10 @@
 
 String对象是不可改变的，具有恒定性。
 
+每个String对象都有常量值。
+
+字符串字面常量是对String类的示例的饮用。
+
 在Java中String对象可以认为是char数组的延伸和进一步的封装。
 
 \begin{noteblock}
@@ -66,6 +70,61 @@ String对象是不可改变的，具有恒定性。
     \item 意味着操作字符串不会出现线程同步问题
     \item 成就了字符串驻留以及共享（常量池）
 \end{itemize}
+
+
+
+\section{字符串连接操作符 + }
+
+
+如果字符串连接操作符运算的结果不是编译时的常量表达式，那么该操作符会隐式地创建新的String对象。
+
+
+如果只有一个操作数表达式是String 类型，那么就会在另一个操作数上执行字符串转换以在运行时产生字符串。 
+对于简单类型Java还可以通过直接将简单类型转换为字符串而优化掉包装器对象的创建。
+
+\textcolor{codepurple}{+}操作字符在语法上是左结合。
+
+例如：
+
+\begin{lstlisting}[style=cjava]
+
+    String first = 1 + 2 + "Java";
+    String second = "Java" + 1 + 2;
+    String three = "Java" + null;
+    System.out.println(first);
+    System.out.println(second);
+    System.out.println(three);
+
+    /** 
+    * Output: 
+    * 
+    * 3Java
+    * Java12
+    * Javanull
+    * 
+    */
+
+\end{lstlisting}
+
+
+在字符串转换方面要特别注意引用类型转行。
+
+如果该引用是null，那么它转换为字符串"null"。
+
+如果其他引用类型，则调用其对象上的toString()方法；如果调用toString()方法的结果是null，那么就用字符串"null"代替。
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
