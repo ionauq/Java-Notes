@@ -147,7 +147,7 @@
   language = {sh},
   style    = {defaultstyle},
   morekeywords={git, php, cd, for, if, else, then, fi, echo, case, in, jcmd, java, jps, javac, javap, javadoc, jstat, jstatd
-      elif, esac, for, do, done, tar, while, until, shift, configure,
+      elif, esac, for, do, done, tar, while, until, shift, configure,uptime
       mv, mkdir, ;;, \$\#, \$1, \$2},
 }
 
@@ -179,7 +179,7 @@
 \parindent 2pt                                                              % 段落缩进距离  
 \parskip 10pt                                                               % 段落间的距离
 \raggedright                                                                % 段落左对齐
-
+\renewcommand{\baselinestretch}{1.3}                                        %正文行距
 \graphicspath{ {images/} }
 
 % 使用titlesec定制章节
@@ -188,6 +188,10 @@
 \titleformat{\section}{\raggedright\Large\bfseries}{\,\thesection\,}{1em}{}
 \titleformat{\subsection}{\raggedright\large\bfseries}{\,\thesubsection\,}{1em}{}
 
+\titlespacing{\chapter}{0bp}{-30bp}{12bp}       % 标题间距
+\titlespacing{\section}{0bp}{0bp}{12bp}
+\titlespacing{\subsection}{0bp}{12bp}{0bp}
+\titlespacing{\subsubsection}{0bp}{12bp}{0bp}
 
 % 脚注编号带圈
 \renewcommand\thefootnote{\ding{\numexpr171+\value{footnote}}}

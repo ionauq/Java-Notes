@@ -1,0 +1,60 @@
+\chapter{Linux命令}
+\section{uptime}
+\label{chap:linux_uptime}
+
+uptime
+
+当前时间系统运行了多长时间、多少用户登陆；以及过去1分钟、5分钟、15分钟的系统平均负载。
+
+\begin{lstlisting}[language=cshell]
+    $ uptime
+
+    # 20:08:43 up 11 days,  6:06,  0 users,  load average: 21.76, 21.24, 19.93
+
+    # 20:08:43      系统当前时间
+    # up 11 days,  6:06     系统运行时间
+    # 0 users       当前登陆用户数
+    # load average: 21.76, 21.24, 19.93     过去1分钟、5分钟、15分钟的系统平均负载
+\end{lstlisting}
+
+
+系统负载
+
+系统负载是处于可运行（runnable）或不可中断（uninterruptable）状态的进程的平均数。\par
+可运行（runnable）状态的进程要么正在使用CPU，要么在等待使用CPU。不可中断状态的进程则正在等待某些I/O访问，例如等待磁盘IO。 \par
+负载均值的意义根据系统中 CPU 的数量不同而不同，负载为 1 对于一个只有单 CPU 的系统来说意味着负载满了，而对于一个拥有 4 CPU 的系统来说则意味着 75\% 的时间里都是空闲的。
+
+
+\par
+OPTIONS
+
+-p, --pretty \par
+\qquad 以漂亮的格式显示正常运行时间
+
+\begin{lstlisting}[language=cshell]
+    uptime -p
+
+    # up 17 weeks, 1 day, 11 hours, 37 minutes
+\end{lstlisting}
+
+
+-s, --since \par
+\qquad 以yyyy-mm-dd HH:MM:SS格式显示系统启动时间
+
+\begin{lstlisting}[language=cshell]
+    uptime -s
+
+    # 2019-11-18 23:30:43
+\end{lstlisting}
+
+
+
+
+
+
+
+
+
+
+
+
