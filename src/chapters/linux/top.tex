@@ -1,14 +1,17 @@
 \section{top}
 \label{chap:linux_top}
 
-top
-
-显示Linux进程
+显示Linux进程信息
 
 top提供了运行系统的动态实时视图。它可以显示系统摘要信息以及当前由Linux内核管理的进程或线程的列表。所显示的系统摘要信息的类型以及为流程显示的信息的类型、顺序和大小都是用户可配置的
 该配置可以在重启时保持不变。
 
-交互式命令
+
+下文以3.3.10版本为例。
+
+\subsection{交互式命令}
+
+进入top命令页面后输入的命令
 
 \menlo{l}     切换是否显示系统平均负载
 
@@ -24,8 +27,18 @@ top提供了运行系统的动态实时视图。它可以显示系统摘要信�
 
 \menlo{m}     切换内存模式显示状态
 
+\menlo{f}     增加/删除/排序字段
 
-OPTIONS
+\menlo{1/2/3}   切换展示所有CPU/numa/node使用情况
+
+\menlo{L}    查找
+
+\menlo{E/e}  概括/线程内存预览
+
+\menlo{S}    切换累积模式
+
+
+\subsection{OPTIONS}
 
 -b  \par
 \qquad 批处理模式操作,可用于将top输出内容发送到其他程序或者文件中
@@ -68,7 +81,6 @@ OPTIONS
     \includegraphics[width=1\textwidth]{linux/top-1.png}
     \caption{top}
 \end{figure}
-
 
 
 第一行输出任务为UPTIME and LOAD Averages
@@ -162,196 +174,159 @@ PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
 
 \end{lstlisting}
 
-
-列含义
-
-
+\subsection{列字段含义}
 
 1. \%CPU  -- CPU使用率  \par
-\qquad CPU使用时间占比
+\qquad CPU使用时间占比;
 
-2. \%MEM  --  内存使用 (常驻内存)   \par
-\qquad 进程使用的物理内存百分比
+2. \%MEM  --  内存使用 (RES)   \par
+\nftt{进程当前使用的可用物理内存占比}
 
 3. CGROUPS  --  Control Groups  \par
-The names of the control group(s) to which a process belongs, or `-' if not applicable for that process.
-
-Control Groups provide for allocating resources (cpu, memory, network bandwidth, etc.) among installation-defined groups of processes.  They enable fine-grained control over allocating, denying, prioritizing, managing and monitoring those resources.
-
-Many different hierarchies of cgroups can exist simultaneously on a system and each hierarchy is attached to one or more subsystems.  A subsystem represents a single resource.
-
-Note:  The CGROUPS field, unlike most columns, is not fixed-width.  When displayed, it plus any other variable width columns will be allocated all remaining screen width (up to the maximum 512 characters).  Even so, such variable width fields could still
-suffer truncation.  See topic 5c. SCROLLING a Window for additional information on accessing any truncated data.
 
 4. CODE  --  Code Size (KiB) \par
-\qquad 可执行代码占用物理内存大小，也称为文本常驻集（Text Resident Set）大小或TRS。
+\nftt{可执行代码占用物理内存大小，也称为文本常驻集（Text Resident Set）大小或TRS。}
 
-5. COMMAND  --  Command Name or Command Line    \par
-Display the command line used to start a task or the name of the associated program.  You toggle between command line and name with `c', which is both a command-line option and an interactive command.
+5. COMMAND  --  命令名/命令行   \par
 
-When you've chosen to display command lines, processes without a command line (like kernel threads) will be shown with only the program name in brackets, as in this example:
-    [kthreadd]
+6. DATA  --  Data + Stack Size (KiB) 数据段 + 栈    \par
+\nftt{可执行代码以外的物理内存的大小，也称为数据常驻集大小或DRS。}
 
-This field may also be impacted by the forest view display mode.  See the `V' interactive command for additional information regarding that mode.
-
-Note: The COMMAND field, unlike most columns, is not fixed-width.  When displayed, it plus any other variable width columns will be allocated all remaining screen width (up to the maximum 512 characters).  Even so, such variable width fields could  still
-suffer truncation.  This is especially true for this field when command lines are being displayed (the `c' interactive command.)  See topic 5c. SCROLLING a Window for additional information on accessing any truncated data.
-
-
-6. DATA  --  Data + Stack Size (KiB)    \par
-The amount of physical memory devoted to other than executable code, also known as the Data Resident Set size or DRS.
-
-7. ENVIRON  --  Environment variables   \par
-Display all of the environment variables, if any, as seen by the respective processes.  These variables will be displayed in their raw native order, not the sorted order you are accustomed to seeing with an unqualified `set'.
-
-Note:  The ENVIRON field, unlike most columns, is not fixed-width.  When displayed, it plus any other variable width columns will be allocated all remaining screen width (up to the maximum 512 characters).  Even so, such variable width fields could still
-suffer truncation.  This is especially true for this field.  See topic 5c. SCROLLING a Window for additional information on accessing any truncated data.
+7. ENVIRON  --  环境变量   \par
 
 8. Flags  --  Task Flags    \par
-This column represents the task's current scheduling flags which are expressed in hexadecimal notation and with zeros suppressed.  These flags are officially documented in <linux/sched.h>.
+\nftt{This column represents the task's current scheduling flags which are expressed in hexadecimal notation and with zeros suppressed.  These flags are officially documented in <linux/sched.h>.}
 
-9. GID  --  有效组id \par
+9. GID  --  有效组ID \par
 
 10. GROUP  --  有效组名 \par
 
-11. NI  --  Nice Value  \par
-The nice value of the task.  A negative nice value means higher priority, whereas a positive nice value means lower priority.  Zero in this field simply means priority will not be adjusted in determining a task's dispatch-ability.
+11. NI  --  Nice Value 进程的nice值。nice值越小优先级越高。 0表示不调整优先级。  \par
 
 12. P  --  Last used CPU (SMP)  \par
-A number representing the last used processor.  In a true SMP environment this will likely change frequently since the kernel intentionally uses weak affinity.  Also, the very act of running top may break this weak affinity and cause  more  processes  to
-change CPUs more often (because of the extra demand for cpu time).
+\nftt{A number representing the last used processor.  In a true SMP environment this will likely change frequently since the kernel intentionally uses weak affinity.  Also, the very act of running top may break this weak affinity and cause  more  processes  to
+change CPUs more often (because of the extra demand for cpu time).}
 
-13. PGRP  --  Process Group Id  \par
-Every  process  is  member of a unique process group which is used for distribution of signals and by terminals to arbitrate requests for their input and output.  When a process is created (forked), it becomes a member of the process group of its parent.
-By convention, this value equals the process ID (see PID) of the first member of a process group, called the process group leader.
+13. PGRP  --  进程组ID  \par
 
 14. PID  --  进程ID \par
 
 15. PPID  --  父进程ID \par
 
-16. PR  --  Priority    \par
-The scheduling priority of the task.  If you see `rt' in this field, it means the task is running under real time scheduling priority.
+16. PR  --  优先级   \par
 
-Under linux, real time priority is somewhat misleading since traditionally the operating itself was not preemptible.  And while the 2.6 kernel can be made mostly preemptible, it is not always so.
+\nftt{进程调度优先级。如果在字段中看到rt，则说明该线程正在实时调度优先级下运行。}
 
-17. RES  --  驻留内存大小 (KiB) \par
-\qquad 线程在使用的非swap物理内存大小（The non-swapped physical memory a task is using.）
+17. RES  --  进程占用内存大小 (KiB) \par
+\nftt{进程使用的未被swap物理内存大小（The non-swapped physical memory a task is using.）}
 
-
-18. RUID  --  真实uid \par
-The real user ID.
+18. RUID  --  真实用户id \par
 
 19. RUSER  --  真实用户名 \par
 
 20. S  --  进程状态(Process Status) \par
+\begin{itemize}
+    \item \nftt{ D = 不可中断睡眠状态(uninterruptible sleep) }
+    \item \nftt{ R = 运行状态(running)   }
+    \item \nftt{ S = 睡眠状态(sleeping) }
+    \item \nftt{ T = stopped by job control signal  }
+    \item \nftt{ t = stopped by debugger during trace   }
+    \item \nftt{ Z = 僵尸状态(zombie)   }
+\end{itemize}
 
-    D = 不可中断睡眠状态(uninterruptible sleep)
-    R = 运行状态(running)
-    S = 睡眠状态(sleeping)
-    T = stopped by job control signal
-    t = stopped by debugger during trace
-    Z = 僵尸状态(zombie)
+\nftt{D状态一般为等待IO，例如磁盘IO、网络IO等。}
 
-Tasks shown as running should be more properly thought of as ready to run --  their task\_struct is simply represented on the Linux run-queue.  Even without a true SMP machine, you may see numerous tasks in this state depending on  top's  delay  interval
-and nice value.
+21. SHR  --  共享内存大小(Shared Memory Size) (KiB)   \par
+\nftt{进程可用的共享内存大小，通常不是所有的都驻留。它只能反应可能与其他进程共享的内存。}
 
-21. SHR  --  Shared Memory Size (KiB)   \par
-The amount of shared memory available to a task, not all of which is typically resident.  It simply reflects memory that could be potentially shared with other processes.
-
-22. SID  --  Session Id \par
-A  session  is  a  collection  of  process groups (see PGRP), usually established by the login shell.  A newly forked process joins the session of its creator.  By convention, this value equals the process ID (see PID) of the first member of the session,
-called the session leader, which is usually the login shell.
+22. SID  -- 会话ID \par
 
 23. SUID  --  Saved User Id \par
-The saved user ID.
 
-24. SUPGIDS  --  Supplementary Group IDs    \par
-The IDs of any supplementary group(s) established at login or inherited from a task's parent.  They are displayed in a comma delimited list.
+24. SUPGIDS  --  附属组ID    \par
 
-Note: The SUPGIDS field, unlike most columns, is not fixed-width.  When displayed, it plus any other variable width columns will be allocated all remaining screen width (up to the maximum 512 characters).  Even so, such variable width fields could  still
-suffer truncation.  See topic 5c. SCROLLING a Window for additional information on accessing any truncated data.
-
-25. SUPGRPS  --  Supplementary Group Names  \par
-The names of any supplementary group(s) established at login or inherited from a task's parent.  They are displayed in a comma delimited list.
-
-Note:  The SUPGRPS field, unlike most columns, is not fixed-width.  When displayed, it plus any other variable width columns will be allocated all remaining screen width (up to the maximum 512 characters).  Even so, such variable width fields could still
-suffer truncation.  See topic 5c. SCROLLING a Window for additional information on accessing any truncated data.
+25. SUPGRPS  --  附属组名  \par
 
 26. SUSER  --  Saved User Name  \par
-The saved user name.
 
-27. SWAP  --  Swapped Size (KiB)    \par
-The non-resident portion of a task's address space.
+27. SWAP  --  Swapped Size (KiB)  线程地址空间的非驻留部分  \par
 
 28. TGID  --  线程组ID（Thread Group Id） \par
-\qquad 任务所属的线程组的ID。它是线程组领导的PID。在内核术语中，它表示那些共享mm\_struct的任务。
+\nftt{任务所属的线程组的ID。它是线程组领导的PID。在内核术语中，它表示那些共享mm\_struct的任务。}
 
 29. TIME  --  CPU Time  \par
-Total CPU time the task has used since it started.  When Cumulative mode is On, each process is listed with the cpu time that it and its dead children have used.  You toggle Cumulative mode with `S', which is both a command-line option and an interactive
-command.  See the `S' interactive command for additional information regarding this mode.
+\nftt{线程启动后使用的总CPU时间。当启用累积模式时，将列出每个进程以及其死去的字进程所使用的CPU时间。可以使用交互命令S来切换累积模式。}
 
 30. TIME+  --  CPU Time, hundredths \par
-The same as TIME, but reflecting more granularity through hundredths of a second.
+\nftt{与TIME相同，但通过百分之一秒反映出更细的粒度。}
 
 31. TPGID  --  Tty Process Group Id \par
-The process group ID of the foreground process for the connected tty, or -1 if a process is not connected to a terminal.  By convention, this value equals the process ID (see PID) of the process group leader (see PGRP).
 
 32. TTY  --  Controlling Tty    \par
-The  name  of  the controlling terminal.  This is usually the device (serial port, pty, etc.) from which the process was started, and which it uses for input or output.  However, a task need not be associated with a terminal, in which case you'll see `?'
-displayed.
 
 33. UID  --  用户ID；进程所有者的真实用户ID   \par
 
 34. USED  --  Memory in Use (KiB)   \par
-This field represents the non-swapped physical memory a task has used (RES) plus the non-resident portion of its address space (SWAP).
+\nftt{此字段表示线程使用的非swapped物理内存(RES)及其地址空间的非驻留部分(SWAP)。}
 
 35. USER  --  用户名；进程所有者的真实用户名  \par
 
-36. VIRT  --  Virtual Memory Size (KiB) \par
-The total amount of virtual memory used by the task.  It includes all code, data and shared libraries plus pages that have been swapped out and pages that have been mapped but not used.
+36. VIRT  --  虚拟内存大小(Virtual Memory Size)(KiB) \par
+\nftt{进程使用的虚拟内存大小。包括代码，数据以及共享库以及已换出的页和已映射但未使用的页。}
 
 37. WCHAN  --  Sleeping in Function \par
-Depending on the availability of the kernel link map (System.map), this field will show the name or the address of the kernel function in which the task is currently sleeping.  Running tasks will display a dash ('-') in this column.
+\nftt{若该进程在睡眠，则显示睡眠中的系统函数名。}
 
-By displaying this field, top's own working set could be increased by over 700Kb, depending on the kernel version.  Should that occur, your only means of reducing that overhead will be to stop and restart top.
-
-38. nDRT  --  Dirty Pages Count \par
-The number of pages that have been modified since they were last written to auxiliary storage.  Dirty pages must be written to auxiliary storage before the corresponding physical memory location can be used for some other virtual page.
+38. nDRT  --  脏页数量（Dirty Pages Count） \par
+\nftt{The number of pages that have been modified since they were last written to auxiliary storage.  Dirty pages must be written to auxiliary storage before the corresponding physical memory location can be used for some other virtual page.}
 
 39. nMaj  --  Major Page Fault Count    \par
-The number of major page faults that have occurred for a task.  A page fault occurs when a process attempts to read from or write to a virtual page that is not currently present in its address space.  A major page fault is when auxiliary  storage  access
-is involved in making that page available.
+\nftt{The number of major page faults that have occurred for a task.  A page fault occurs when a process attempts to read from or write to a virtual page that is not currently present in its address space.  A major page fault is when auxiliary  storage  access
+is involved in making that page available.}
 
 40. nMin  --  Minor Page Fault count    \par
-The number of minor page faults that have occurred for a task.  A page fault occurs when a process attempts to read from or write to a virtual page that is not currently present in its address space.  A minor page fault does not involve auxiliary storage
-access in making that page available.
+\nftt{The number of minor page faults that have occurred for a task.  A page fault occurs when a process attempts to read from or write to a virtual page that is not currently present in its address space.  A minor page fault does not involve auxiliary storage
+access in making that page available.}
 
-41. nTH  --  Number of Threads  \par
-The number of threads associated with a process.
+41. nTH  --  线程数量  \par
 
 42. nsIPC  --  IPC namespace    \par
-The Inode of the namespace used to isolate interprocess communication (IPC) resources such as System V IPC objects and POSIX message queues.
+\nftt{The Inode of the namespace used to isolate interprocess communication (IPC) resources such as System V IPC objects and POSIX message queues.}
 
 43. nsMNT  --  MNT namespace    \par
-The Inode of the namespace used to isolate filesystem mount points thus offering different views of the filesystem hierarchy.
+\nftt{The Inode of the namespace used to isolate filesystem mount points thus offering different views of the filesystem hierarchy.}
 
 44. nsNET  --  NET namespace    \par
-The Inode of the namespace used to isolate resources such as network devices, IP addresses, IP routing, port numbers, etc.
+\nftt{The Inode of the namespace used to isolate resources such as network devices, IP addresses, IP routing, port numbers, etc.}
 
 45. nsPID  --  PID namespace    \par
-The Inode of the namespace used to isolate process ID numbers meaning they need not remain unique.  Thus, each such namespace could have its own `init' (PID \#1) to manage various initialization tasks and reap orphaned child processes.
+\nftt{The Inode of the namespace used to isolate process ID numbers meaning they need not remain unique.  Thus, each such namespace could have its own `init' (PID \#1) to manage various initialization tasks and reap orphaned child processes.}
 
 46. nsUSER  --  USER namespace  \par
-The Inode of the namespace used to isolate the user and group ID numbers.  Thus, a process could have a normal unprivileged user ID outside a user namespace while having a user ID of 0, with full root privileges, inside that namespace.
+\nftt{The Inode of the namespace used to isolate the user and group ID numbers.  Thus, a process could have a normal unprivileged user ID outside a user namespace while having a user ID of 0, with full root privileges, inside that namespace.}
 
 47. nsUTS  --  UTS namespace    \par
-The Inode of the namespace used to isolate hostname and NIS domain name.  UTS simply means "UNIX Time-sharing System".
+\nftt{The Inode of the namespace used to isolate hostname and NIS domain name.  UTS simply means "UNIX Time-sharing System".}
 
 48. vMj  --  Major Page Fault Count Delta   \par
-The number of major page faults that have occurred since the last update (see nMaj).
+\nftt{The number of major page faults that have occurred since the last update (see nMaj).}
 
 49. vMn  --  Minor Page Fault Count Delta   \par
-The number of minor page faults that have occurred since the last update (see nMin).
+\nftt{The number of minor page faults that have occurred since the last update (see nMin).}
+
+
+\subsection{示例}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{linux/top_cpu_over_100.png}
+    \caption{top cpu利用率超过100\%}
+\end{figure}
+
+\subsubsection{如上图所示：CPU使用率超过100\%}
+
+这里CPU使用率是所有CPU的总和。即你的CPU是多核处理器。可以使用交互式命令1来查看所有CPU的使用情况。
+
 
 
 

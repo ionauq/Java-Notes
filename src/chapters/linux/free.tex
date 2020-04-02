@@ -1,0 +1,32 @@
+\section{free}
+\label{chap:linux_free}
+
+显示系统中空闲和使用的物理内存以及swap内存量。还有内核使用的缓冲区和缓存。这些信息来源于/proc/meminfo。
+
+total   \par
+\nftt{总内存大小 (MemTotal and SwapTotal in /proc/meminfo)}
+
+used    \par   
+\nftt{已使用的内存大小 (calculated as total - free - buffers - cache)}
+free \par
+\nftt{未使用的内存 (MemFree and SwapFree in /proc/meminfo)}
+
+shared  \par
+\nftt{(主要)由tmpfs使用的内存}
+
+buffers \par
+\nftt{内核缓冲区使用的内存 (Buffers in /proc/meminfo)}
+
+cache   \par
+\nftt{page cache and slabs (Cached and SReclaimable in /proc/meminfo)}
+
+buff/cache  \par
+\nftt{buffers and cache总和}
+
+available   \par
+\nftt{Estimation  of  how  much  memory is available for starting new applications, without swapping. Unlike the data provided by the cache or free fields, this field takes into account page cache and also that not all reclaimable memory slabs will be reclaimed due to items being in use (MemAvailable in /proc/meminfo, available on kernels 3.14,
+       emulated on kernels 2.6.27+, otherwise the same as free)}
+
+\notebox{
+    linux系统内核为文件设置了一个缓存，对文件读写的数据内容都缓存在这里。这个缓存称为page cache(页缓存)。
+}

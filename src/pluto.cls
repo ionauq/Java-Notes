@@ -147,7 +147,7 @@
   language = {sh},
   style    = {defaultstyle},
   morekeywords={git, php, cd, for, if, else, then, fi, echo, case, in, jcmd, java, jps, javac, javap, javadoc, jstat, jstatd
-      elif, esac, for, do, done, tar, while, until, shift, configure,uptime
+      elif, esac, for, do, done, tar, while, until, shift, configure, uptime, top, free, vmstat, ps,
       mv, mkdir, ;;, \$\#, \$1, \$2},
 }
 
@@ -196,6 +196,8 @@
 % 脚注编号带圈
 \renewcommand\thefootnote{\ding{\numexpr171+\value{footnote}}}
 
+\newcommand{\nft}{\fontsize{9pt}{9pt}\selectfont}                     % 9pt字体
+\newcommand{\nftt}[1]{\qquad\nft{#1}}                                 % 带前置空格的9pt字体
 
 
 \renewcommand{\contentsname}{\centerline{目 录}}
