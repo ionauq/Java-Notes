@@ -116,3 +116,28 @@ Throwable Error Exception RuntimeException 非RuntimeException
  */
 
 \end{lstlisting}
+
+
+
+
+\section{异常捕获}
+
+try.catch.finally
+
+Java7开始，可以在一个catch表达式中对多种类型异常进行合并捕获。
+
+\begin{lstlisting}[language=java]
+    public int getBinaryInt(String number) {
+        int result = -1;
+        result = result / 2;
+        try {
+            result = Integer.parseInt(number, 2);
+        } catch (NumberFormatException | ArithmeticException e) {
+                
+        }
+
+        return result;
+    }
+\end{lstlisting}
+
+

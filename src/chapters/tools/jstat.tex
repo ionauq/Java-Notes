@@ -1,0 +1,57 @@
+\section{jstat命令}
+\label{chap:tools_jstat}
+
+监控JVM统计数据。
+
+
+\begin{lstlisting}[language=cshell]
+
+jstat [ generalOption | outputOptions vmid [ interval[s|ms] [ count ] ]
+
+\end{lstlisting}
+
+
+generalOption
+
+单个通用命令行选项；可选参数为 -help 和 -options
+
+
+outputOptions
+
+输出选项，可以配置-t, -h, and -J 选项使用
+
+
+
+-statOption
+
+可以使用-options选项输出支持的统计选项
+
+
+\begin{itemize}
+
+    \item class: Displays statistics about the behavior of the class loader.
+
+    \item compiler: Displays statistics about the behavior of the Java HotSpot VM Just-in-Time compiler.
+
+    \item gc: Displays statistics about the behavior of the garbage collected heap.
+
+    \item gccapacity: Displays statistics about the capacities of the generations and their corresponding spaces.
+
+    \item gccause: Displays a summary about garbage collection statistics (same as -gcutil), with the cause of the last and current (when applicable) garbage collection events.
+
+    \item gcnew: Displays statistics of the behavior of the new generation.
+
+    \item gcnewcapacity: Displays statistics about the sizes of the new generations and its corresponding spaces.
+
+    \item gcold: Displays statistics about the behavior of the old generation and metaspace statistics.
+
+    \item gcoldcapacity: Displays statistics about the sizes of the old generation.
+
+    \item gcmetacapacity: Displays statistics about the sizes of the metaspace.
+
+    \item gcutil: Displays a summary about garbage collection statistics.
+
+    \item printcompilation: Displays Java HotSpot VM compilation method statistics.
+    
+\end{itemize}
+

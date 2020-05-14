@@ -1,0 +1,59 @@
+\section{jmap命令}
+\label{chap:tools_jmap}
+
+打印进程、核心文件或远程调试服务器的共享对象内存映射或堆内存详细信息。
+
+\begin{lstlisting}[language=cshell]
+
+jmap [ options ] pid
+
+jmap [ options ] executable core
+
+jmap [ options ] [ pid ] server-id@ ] remote-hostname-or-IP
+
+\end{lstlisting}
+
+pid
+
+使用jps命令显示的进程id
+
+
+如果进程运行在64位Java虚拟机上，需要指定 -J-d64 选项。例如：
+
+\begin{lstlisting}[language=cshell]
+jmap -J-d64 -heap pid
+\end{lstlisting}
+
+
+\subsection{选项}
+
+
+\menlo{<no option>}
+When no option is used, the jmap command prints shared object mappings. For each shared object loaded in the target JVM, the start address, size of the mapping, and the full path of the shared object file are printed. This
+behavior is similar to the Oracle Solaris pmap utility.
+
+\menlo{-dump:[live,] format=b, file=filename}
+Dumps the Java heap in hprof binary format to filename. The live suboption is optional, but when specified, only the active objects in the heap are dumped. To browse the heap dump, you can use the jhat(1) command to read the
+generated file.
+
+\menlo{-finalizerinfo}
+Prints information about objects that are awaiting finalization.
+
+\menlo{-heap}
+Prints a heap summary of the garbage collection used, the head configuration, and generation-wise heap usage. In addition, the number and size of interned Strings are printed.
+
+\menlo{-histo[:live]}
+Prints a histogram of the heap. For each Java class, the number of objects, memory size in bytes, and the fully qualified class names are printed. The JVM internal class names are printed with an asterisk (*) prefix. If the live
+suboption is specified, then only active objects are counted.
+
+\menlo{-clstats}
+Prints class loader wise statistics of Java heap. For each class loader, its name, how active it is, address, parent class loader, and the number and size of classes it has loaded are printed.
+
+\menlo{-F}
+Force. Use this option with the jmap -dump or jmap -histo option when the pid does not respond. The live suboption is not supported in this mode.
+
+\menlo{-h / -help}
+打印帮助信息
+
+\menlo{-Jflag}
+Passes flag to the Java Virtual Machine where the jmap command is running.

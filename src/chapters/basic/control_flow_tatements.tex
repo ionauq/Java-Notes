@@ -1,13 +1,13 @@
+\chapter{控制流程}
+\label{chap:control_flow}
 
-switch 语句
+\section{switch}
 
-Java
+\textbf{Java}
 
-只支持(byte,short,char,int)基本类型,Enum类型以及String,Character,Byte,Short和Integer类。
+只支持基本类型(byte,short,char,int)、Enum类型以及String, Character, Byte, Short和Integer类。
 
-只支持常量表达式。
-
-case会进行整数范围验证。
+只支持常量表达式，case会进行整数范围验证。
 
 \begin{lstlisting}[style=cjava,caption={swtich},label=useless]
     /*
@@ -50,7 +50,8 @@ case会进行整数范围验证。
     switchTestWithCharacter(new Character('a'));
 \end{lstlisting}
 
-PHP
+
+\textbf{PHP}
 
 case 表达式可以是任何求值为简单类型的表达式，即整型或浮点数以及字符串。不能用数组或对象，除非它们被解除引用成为简单类型。
 
@@ -58,7 +59,7 @@ case 表达式可以是任何求值为简单类型的表达式，即整型或浮
 
 case比较执行的是松散比较 ==
 
- \begin{lstlisting}[language=php]
+ \begin{lstlisting}[language=php,caption={php-swtich},label=useless]
     $beer = 'caseC';
     $a ='caseA';
 

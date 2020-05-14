@@ -157,6 +157,12 @@
   style = {defaultstyle},
 }
 
+%% php %%
+\lstdefinestyle{cphp}{
+  language = {php},
+  style = {defaultstyle},
+}
+
 %% shell %%
 \lstdefinestyle{cshell}{
   language = {cshell},

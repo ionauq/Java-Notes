@@ -1,0 +1,161 @@
+\chapter{基本语法}
+\label{chap:grammar}
+
+
+\section{基本规范}
+
+\textbf{Java区分大小写}
+
+Java采用骆驼命名法，CamelCase。
+
+\section{数据类型}
+
+Java包含8种基本类型。\par
+\begin{itemize}
+        \item   4种整型
+        \item   2种浮点类型 
+        \item   1种表示Unicode编码的字符单元的字符类型char
+        \item   1种表示真值的boolean类型
+\end{itemize}
+
+
+\subsection{整型}
+
+\renewcommand\arraystretch{2}
+\begin{tabular}{l|l|l}
+    类型        &      存储需求        &     取值范围        \\               \hline
+    byte       &       1字节          & -128 $\sim$ 127     \\
+    short      &       2字节          & -32768 $\sim$ 32767  \\
+    int        &       4字节          &  -2147483648 $\sim$ 2147483647  \\
+    long       &       8字节          &  -9223372036854775808 $\sim$ 9223372036854775807  \\
+\end{tabular}\newline
+
+\notebox{Java 没有任何无符号（unsigned）形式的整型。}
+
+长整型值有一个后缀l或者L。
+
+\begin{lstlisting}[style=cjava]
+        long number = 123L;             // number值为：123
+\end{lstlisting}
+
+
+\begin{itemize}
+    \item   二进制带前缀0b或者0B （从java 7开始）
+    \item   八进制带前缀0
+    \item   十六进制带前缀0x或者0X
+\end{itemize}
+
+
+\begin{lstlisting}[style=cjava]
+        int binaryNumber      = 0B101;              // 二进制表示   5 
+
+        int hexadecimalNumber = 0x123;              // 十六进制表示 291   
+
+        int octonaryNumber    = 0123;              // 八进制表示   83
+\end{lstlisting}
+
+
+
+同样从Java7开始为数字加下划线，Java编译器会去除这些下划线
+
+\begin{lstlisting}[language=java]
+        Sytem.out.println(0_1_0);       // 010表示八进制，输出8
+\end{lstlisting}
+
+
+toBinaryString
+
+
+\cautionbox{
+注意JS INT类型的值范围:
+\begin{itemize}
+        \item   \href{http://speakingjs.com/es5/ch11.html}{Integers in JavaScript} 
+        \item   \href{http://speakingjs.com/es5/ch11.html\#safe\_integers}{Safe Integers}
+        \end{itemize}
+}
+
+
+\subsection{浮点数}
+
+
+\renewcommand\arraystretch{2}
+\begin{tabular}{l|l|l}
+    类型         &      存储需求        &     取值范围        \\               \hline
+    float        &       4字节          & 有效位数为6-7位      \\
+    double      &       8字节          & 有效位数为15位       \\
+\end{tabular}\newline
+
+
+float类型的值要有后缀f或者F。没有后缀默认为double类型。
+
+double类型也可以添加d或者D后缀。
+
+
+用于表示溢出或者出错情况的三个特殊浮点值：
+
+\begin{itemize}
+        \item   正无穷大  
+        \item   负无穷大
+        \item   NaN （不是一个数字）
+\end{itemize}
+
+例如: 一个正整数除以 0 的结果为正无穷大； 计算 0/0或者负数的平方根结果为NaN。
+
+对应常量为:
+\begin{lstlisting}[language=java]
+        // float
+        Float.POSITIVE_INFINITY;
+        Float.NEGATIVE_INFINITY;
+        Float.NaN;
+        // double
+        Double.POSITIVE_INFINITY;
+        Double.NEGATIVE_INFINITY;
+        Double.NaN;
+\end{lstlisting}
+
+
+所有“非数值”的值都认为是不相同的。
+
+\begin{lstlisting}[language=java]
+        if(Double.isNaN(x))   // check whether x is "not a number"
+\end{lstlisting}
+
+
+
+
+\textbf{char类型}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

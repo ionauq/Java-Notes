@@ -214,8 +214,29 @@ change CPUs more often (because of the extra demand for cpu time).}
 15. PPID  --  父进程ID \par
 
 16. PR  --  优先级   \par
+可以使用chrt命令查看进程调度
 
-\nftt{进程调度优先级。如果在字段中看到rt，则说明该线程正在实时调度优先级下运行。}
+进程调度分为Normal Scheduling和Real-time Scheduling
+
+Normal Scheduling: SCHED\_OTHER      SCHED\_IDLE   SCHED\_BATCH
+
+Real-time Scheduling: SCHE\_FIFO     SCHED\_RR
+
+Priority value: [1,99] 值越低优先级越高
+
+Normal Scheduling priority默认值为0
+
+SCHED\_OTHER: 对应time-sharing policy (RR)
+
+PR值和NICE仅对Normal Scheduling进程有效；
+PR = 20 + NICE(友好值[-20,19]) = [0,39] PR值越高优先级越低
+
+SCHED\_FIFO和SCHED\_RR  real-time process/thread
+
+priority = [1,99]
+PR = -1 - priority = [-100, -2]
+
+\nftt{进程调度优先级。如果在字段中看到rt，则说明该线程是Real-time Scheduling。}
 
 17. RES  --  进程占用内存大小 (KiB) \par
 \nftt{进程使用的未被swap物理内存大小（The non-swapped physical memory a task is using.）}
