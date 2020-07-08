@@ -1,0 +1,65 @@
+mmap
+
+pmap
+
+pidstat
+
+
+lscpu
+
+htop
+
+free排查内存泄露
+
+dmesg
+top
+pidstat
+mpstat
+dstat
+
+perf top/perf report/perf 
+
+pstack
+
+
+sar(1), pidstat(1), iostat(1), vmstat(8)
+
+#### lsof 恢复有句柄的文件， proc/进程id/fd/* 
+
+
+#### top硬中断，软中断
+
+#### free排查内存泄露  看那个mysql视频
+
+### buffer/cache
+
+
+cache 的内容
+
+linux系统内核为文件设置了一个缓存，对文件对读写的数据都缓存在这里。这个缓存成为page cache 页缓存。
+
+使用page cache都IO操作成为buffer I/O，默认情况下，内核都是使用buffer I/O .但是有的应用不希望使用内核缓存，而是由应用提供内存，这种由应用提供内存的I/O
+成为direct I/O.
+
+buffer I/O 在内核中是会阻塞的。
+
+文件系统以块的方式来组织的，文件块一般为2/4/8扇区。
+
+buffer head 是个管理结构，它只是标示文件块的序号以及文件块的缓存地址。
+
+
+
+讲解一下/proc/meminfo的内容含义
+
+这块要分享内存管理
+
+
+## 什么是Slab
+
+
+## 查看页大小
+getconf PAGE_SIZE
+
+
+
+https://blog.holbertonschool.com/hack-the-virtual-memory-drawing-the-vm-diagram/

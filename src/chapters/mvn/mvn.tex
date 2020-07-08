@@ -1,14 +1,13 @@
-## maven
+\chapter{maven}
+\label{chap:maven}
 
-### maven 安装
+\section{maven安装}
 
 MAVEN_OPTS 环境变量
 
-```
-
+\begin{lstlisting}[style=cshell]
 MAVEN_OPTS = -Xms128m -Xmx512m
-
-```
+\end{lstlisting}
 
 配置用户范围的settings.xml
 
@@ -27,21 +26,31 @@ artifactId 当前Maven项目在组中唯一的ID
 
 dependencies依赖项目
 
-scope依赖范围   test只对测试代码有效
+scope依赖范围  
 
-    compile 编译依赖范围
-    
-    test    测试依赖范围
-
-    provided 已提供依赖范围
-
-    runtime 运行时依赖范围
-
-    system 系统依赖范围
-
-    import 导入依赖范围
+\begin{itemize}
+    \item test    测试依赖范围
+    \item compile 编译依赖范围
+    \item provided 已提供依赖范围
+    \item runtime 运行时依赖范围
+    \item system 系统依赖范围
+    \item import 导入依赖范围
+\end{itemize}
     
 
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 
 type 依赖的类型
 
@@ -66,24 +75,9 @@ mvn安装文件
 
 例如:
 
-```
-
-mvn install:install-file -Dfile=path/to/hello-world-1.0.jar -DgroupId=com.example.seonwater -DartifactId=hello-world -Dversion=1.0 -Dpackaging=jar
-
-```
-
-
-
-
-## 常见名词整理
-
-1. war和war exploded的区别
-2. java classpath参数的含义
-3. META-INF 文件夹的含义
-4. WEB-INF文件夹的含义
-5. jar，war，ear区别
-6. 
-
+\begin{lstlisting}[style=cshell]
+    mvn install:install-file -Dfile=path/to/hello-world-1.0.jar -DgroupId=com.example.seonwater -DartifactId=hello-world -Dversion=1.0 -Dpackaging=jar
+\end{lstlisting}
 
 
 

@@ -32,6 +32,8 @@
 \RequirePackage{xparse}           % awesomebox依赖项
 \RequirePackage{awesomebox}
 \RequirePackage{subfigure}
+\RequirePackage{inputenc}         % 调整表格间距引入
+% \usepackage{caption}
 
 
 % 加载字体
@@ -147,7 +149,7 @@
   language = {sh},
   style    = {defaultstyle},
   morekeywords={git, php, cd, for, if, else, then, fi, echo, case, in, jcmd, java, jps, javac, javap, javadoc, jstat, jstatd
-      elif, esac, for, do, done, tar, while, until, shift, configure, uptime, top, free, vmstat, ps,
+      elif, esac, for, do, done, tar, while, until, shift, configure, uptime, top, free, vmstat, ps, mvn, telnet,
       mv, mkdir, ;;, \$\#, \$1, \$2},
 }
 
@@ -205,6 +207,8 @@
 \newcommand{\nft}{\fontsize{9pt}{9pt}\selectfont}                     % 9pt字体
 \newcommand{\nftt}[1]{\qquad\nft{#1}}                                 % 带前置空格的9pt字体
 
+% 设置表格标题在底部
+% \captionsetup[table]{position=bottom}
 
 \renewcommand{\contentsname}{\centerline{目 录}}
 \renewcommand{\listfigurename}{插图目录}

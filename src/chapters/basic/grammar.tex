@@ -126,6 +126,50 @@ double类型也可以添加d或者D后缀。
 \textbf{char类型}
 
 
+\section{运算符}
+
+\subsection{位运算符}
+
+\renewcommand\arraystretch{2}
+\begin{tabular}{l|l|l}
+    操作符    &     名称          &     说明                                            \\   \hline
+    \~{}     &  Not（按位取反）   & 一元运算符 \quad 0变为1、将1变为0                       \\
+    \&       &   And（按位与）    & 二元元运算符 \quad 两值全为1则为1 \quad 例：1\&1=1       \\
+    ｜       &   Or（按位或）     & 二元元运算符 \quad 两值有1则为1 \quad 例： 0|1=1         \\
+    \^{}     &   Xor（按位异或）  & 二元元运算符 \quad 两值不相同则异或结果为1 \quad 例： 1\^{}0=1   \\
+    <<       &  左移位           &                \\
+    >>       &  右移位           &                \\ 
+    >>>      & 无符号右移位       &                 \\
+\end{tabular}\newline
+
+
+避免时序攻击的字符串比较
+
+\begin{lstlisting}[language=java]
+        static boolean equals(byte[] s1, byte[] s2) {
+                if (s1.length != s2.length) {
+                  return false;
+                }
+                char c = 0;
+                for (int i = 0; i < s1.length; i++) {
+                  c |= (s1[i] ^ s2[i]);
+                }
+                return c == 0;
+              }
+        
+\end{lstlisting}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
