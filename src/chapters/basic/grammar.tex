@@ -132,20 +132,53 @@ double类型也可以添加d或者D后缀。
 
 \renewcommand\arraystretch{2}
 \begin{tabular}{l|l|l}
-    操作符    &     名称          &     说明                                            \\   \hline
-    \~{}     &  Not（按位取反）   & 一元运算符 \quad 0变为1、将1变为0                       \\
-    \&       &   And（按位与）    & 二元元运算符 \quad 两值全为1则为1 \quad 例：1\&1=1       \\
-    ｜       &   Or（按位或）     & 二元元运算符 \quad 两值有1则为1 \quad 例： 0|1=1         \\
-    \^{}     &   Xor（按位异或）  & 二元元运算符 \quad 两值不相同则异或结果为1 \quad 例： 1\^{}0=1   \\
-    <<       &  左移位           &                \\
-    >>       &  右移位           &                \\ 
-    >>>      & 无符号右移位       &                 \\
+    操作符    &     名称          &     说明                                                   \\   \hline
+    \~{}     &  Not（按位取反）   & 一元运算符   \quad 0变为1、将1变为0                            \\
+    \&       &   And（按位与）    & 二元运算符 \quad 两值全为1则为1 \quad 例：1\&1=1                \\
+    ｜       &   Or（按位或）     & 二元运算符 \quad 两值有1则为1 \quad 例： 0|1=1                  \\
+    \^{}     &   Xor（按位异或）  & 二元运算符 \quad 两值不相同则异或结果为1 \quad 例： 1\^{}0=1      \\
+    <<       &  左移位           & 二元运算符 \quad                                              \\
+    >>       &  右移位           & 二元运算符 \quad 符号运算符会填充高位                                \\ 
+    >>>      & 无符号右移位       & 二元运算符 \quad 运算符会用0填充高位                             \\
 \end{tabular}\newline
+
+
+\textbf{移位}
+
+
+字节顺序
+
+
+对于w位的操作数$x$用位表示为 [$x_{w-1}$, $x_{w-2}$, ... , $x_{0}$, $x_{0}$ ]。
+其中$x_{w-1}$是最高有效位，而$x_{0}$是最低有效位。
+
+小端法(little endian): 选择在内存中按照从最低有效字节到最高有效字节的顺序存储对象
+
+大端法(big endian): 选择在内存中按照从最高有效字节到最低字节的顺序存储对象
+
+假设变量x的类型为int，位于地址0x100处，它的十六进制值为0x1234567。地址范围0x100 ～ 0x103的字节顺序。
+
+
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=1\textwidth]{basic/big_little_endian.png}
+    \end{figure}
+
+
+移位运算符的右操作数会先完成取模运算。int类型模32，long类型模64。
+
+
+\begin{lstlisting}[language=java]
+
+\end{lstlisting}
+
+
 
 
 避免时序攻击的字符串比较
 
 \begin{lstlisting}[language=java]
+
         static boolean equals(byte[] s1, byte[] s2) {
                 if (s1.length != s2.length) {
                   return false;

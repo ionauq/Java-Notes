@@ -1,7 +1,15 @@
 \section{synchronized}
 \label{chap:synchronized}
 
+解决共享资源竞争
+
+所有的并发模式在解决线程冲突问题时，都是采用序列化访问共享资源的方案。也就是说在给定时刻只允许一个任务访问共享资源。
+
+因为锁语句产生了一种互相排斥的效果，所以这种机制常常称为互斥量(mutex)。
+
 JDK为什么要设计synchronized?
+
+要把共享资源包装进一个对象中。
 
 多线程编程中，有可能出现多个线程同时访问同一个共享的，可变资源的情况。这种资源可能是对象、变量、文件等。
 
@@ -21,10 +29,10 @@ JDK为什么要设计synchronized?
 
 \notebox{
     synchronized 属于隐式锁 \par
-    隐式锁：不需要自己通过写代码取加锁跟解锁
+    隐式锁：不需要自己通过写代码去加锁跟解锁
 }
 
-synchronized使用与实现
+\subsection{synchronized使用与实现}
 
 使用方式
 
@@ -34,6 +42,7 @@ synchronized使用与实现
     \item 同步代码块， 锁是括号里面的对象
 \end{itemize}
 
+对于某个特定对象来说，其所有synchronized方法共享同一个锁。
 
 实现方式
 
@@ -48,11 +57,8 @@ oop.hpp
 \href{https://gist.github.com/arturmkrtchyan/43d6135e8a15798cc46c}{Object Header}
 
 
-#TODO:
-
-
-> 实例对象内存存储是怎样的？
-> 对象的实例存在堆区，对象元数据存在元空间（方法区），对象的引用存在与栈空间
+实例对象内存存储是怎样的？
+对象的实例存在堆区，对象元数据存在元空间（方法区），对象的引用存在与栈空间
 
 
 锁的种类
@@ -71,6 +77,35 @@ JDK1.6之前是重量级锁，之后对synchronized对实现进行了优化，�
 为什么不直接上重量级锁
 
 上重量级锁会涉及到线程上下文切换？线程上下文切换会涉及到操作系统用户态到内核态的切换。
+
+
+
+volatile保证了原子性和可见性。
+
+volatile
+当一个域的值依赖它之前的值（例如递增一个计数器） volatile就无法工作。
+
+如果某个域的值受到其他域的值的限制，那么volatile也无法工作。
+
+volatile会告诉编译器不要执行任何移除读取和写入操作的优化。
+
+
+\subsection{原子性}
+
+原子性可以应用于除long和double之外的所有基本类型之上的“简单操作”。
+对于读取和写入除long和double之外的基本类型变量这样的操作，可以保证他们会被当作不可分(原子)的操作
+来操作内存。
+
+
+\notebox{
+    JVM将64为(long和double变量)的读取和写入当作两个分离的32位操作来执行，这就导致了
+    不同的任务可以看到不正确的结果的可能。(字撕裂)
+
+}
+
+\subsection{可见性}
+
+
 
 
 
@@ -108,4 +143,11 @@ MESI缓存一致协议
 
 
 https://www.slideshare.net/cnbailey/memory-efficient-java
+
+
+https://github.com/farmerjohngit/myblog
+
+
+
+https://www.pdai.tech/
 

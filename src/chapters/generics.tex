@@ -12,3 +12,125 @@
 \section{范型方法}
 
 \section{通配符类型}
+
+? extends T 
+
+? super T
+
+无限定通配符
+
+<?>
+
+
+
+\section{范型代码和虚拟机}
+
+虚拟机没有泛型类型对象——所有对象都属于普通类。
+
+\subsection{类型擦除}
+ 
+擦除类型变量并替换为限定类型（无限定的变量用Object）。
+
+原始类型用第一个限定的类型变量来替换，如果没有给定限定就用Object替换。
+
+例如类Pair<T>中的类型变量没有显式的限定，因此原始类型用Object替换T。为了提高效率应该将标签(tagging)接口（即没有方法的接口）
+放在边界列表的末尾。
+
+\begin{lstlisting}[style=cjava,label=useless]
+    public class Interval<T extends Comparable & Serializable> implements Serializable
+    {
+        private T lower;
+        private T upper;
+
+        public Interval(T first, T second){
+
+        }
+    }
+
+    public class Interval implements Serializable
+    {
+        private Comparable lower;
+        private Comparable upper;
+
+        public Interval(Comparable first, Comparable second){
+
+        }
+    }
+\end{lstlisting}
+
+\subsection{翻译泛型表达式}
+
+当程序调用泛型方法时，如果擦除返回类型，编译器插入强制类型转换。
+
+编译器会把方法调用翻译为两条虚拟机指令:
+
+1. 对原始方法的调用
+2. 将返回的Object类型（无限定类型为例）强制转化为特定类型。
+
+
+桥方法被合成来保持多态。
+
+
+\subsection{约束和局限性}
+
+\subsubsection{不能使用基本类型实例化类型参数}
+
+\subsubsection{运行时类型查询只适用于原始类型}
+
+\subsubsection{不能创建参数化类型的数组}
+
+可以声明通配类型的数组，然后进行类型转换:
+
+\begin{lstlisting}[style=cjava,label=useless]
+    Pair<String>[] table = new Pair<String>[10]; // Error
+    Pair<String>[] table = (Pair<String>[]) new Pair<?>[10];
+\end{lstlisting}
+
+如果需要收集参数化类型对象，只有一种安全而有效的方法：使用ArrayList:ArrayList<Pair<String>>。
+
+
+\subsubsection{Varargs警告}
+\begin{lstlisting}[style=cjava,label=useless]
+    public static <T> void addAll(Collection<T> coll, T... ts){
+
+    }
+\end{lstlisting}
+
+\subsubsection{不能实例化类型变量}
+ 不能使用像new T(...), new T[...]或者T.class这样的表达式中的类型变量。
+ 错误实例
+ \begin{lstlisting}[style=cjava,label=useless]
+    public Pair(){
+        first = new T();    second = new T();   // Errors
+    }
+ \end{lstlisting}
+
+ \begin{lstlisting}[style=cjava,label=useless]
+    Pair<String> p = Pair.makePair(String::new);
+
+    public static <T> Pair<T> makePair(Supplier<T> constr){
+        return new Pair<>(constr.get(), constr.get());
+    }
+
+    Pair<String> otherPair = Pair.makePairOther(String.class);
+    public static <T> Pair<T> makePairOther(Class<T> cl){
+        try{
+            return new Pair<>(cl.newInstance(), cl.newInstance());
+        }catch(Exception ex){
+            return null;
+        }
+    }
+ \end{lstlisting}
+
+ \subsubsection{不能构造泛型数组}
+ \subsubsection{泛型类的静态上下文中类型变量无效}
+
+ \subsubsection{不能抛出或者捕获泛型类的实例}
+
+ \subsubsection{可以消除对受查异常的检查}
+ 
+
+
+
+
+

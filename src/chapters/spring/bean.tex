@@ -1,0 +1,55 @@
+\chapter{Spring}
+
+\subsection{使用应用上下文}
+
+AnnotationConfigApplicationContext:从一个或多个基于Java的配置类中加载Spring应用上下文。
+
+AnnotationConfigWebApplicationContext:从一个或多个基于Java的配置类中加载Spring Web应用上下文。
+
+ClassPathXmlApplicationContext:从类路径下的一个或多个XML配置文件中加载上下文定义，把应用上下文的定义文件做为类资源。
+
+FileSystemXmlApplicationContext:从文件系统下的一个或者多个XML配置文件中加载上下文定义。
+
+XmlWebApplicationContext:从web应用下的一个或者多个Xml配置文件中加载上下文定义。
+
+
+自动装配方法
+
+@Component 表明该类会做为组件类，并告知Spring要为这个类创建Bean。
+@ComponentScan 启用组件扫描，查找带有@Component注解的类。
+或者使用xml格式。<context:component-scan base-package=""/>
+
+@AutoWired 自动装配Bean。可以用在属性、构造器、属性的Setter方法上。其实它可以用在任何方法上。为了避免
+没有匹配的bean而抛出异常可以使用@AutoWired(required=false)，然而这样需要添加非null检查。
+
+显失装配
+
+Java和XML方式
+
+
+\subsection{处理自动装配的歧义性}
+如果多个类实现了同一接口，而在使用接口做为属性等时，spring不知道加载哪一个类。
+
+使用限定符@Qualifier在注入时指定注入进入哪个bean。
+
+
+\subsection{bean的作用域}
+
+在默认情况下，spring应用上下文中所有bean都是做为单例(singleton)的形式创建的。
+
+Spring定义了多种作用域
+
+\begin{itemize}
+    \item 单例(Singleton)   在整个应用中，只创建bean的一个实例
+    \item 原型(Prototype)   每次注入或者通过Spring应用上下文获取的时候，都会创建一个新的bean实例
+    \item 会话(Session)     在Web应用中，为每一个会话创建一个bean实例
+    \item 请求(Request)     在Web应用中，为每个请求创建一个bean实例
+\end{itemize}
+
+使用@Scope注解修改原型作用域。
+
+
+
+
+
+

@@ -1,3 +1,17 @@
+\chapter{内部类}
+\label{chap:inner_class}
+
+可以将一个类的定义放在另一个类的定义内部，这就是内部类。
+
+内部类的对象与制造它的外围对象(enclosing object)之间就有一种联系，它能访问其外围对象的所有成员，而不要任何特殊条件。
+内部类还拥有其外围类的所有元素的访问权。
+
+
+\section{.this和.new}
+
+
+
+
 Anonymous Inner Class
 
 It is an inner class without a name and for which only a single object is created.
@@ -42,6 +56,13 @@ A normal class can implement any number of interfaces but anonymous inner class 
 A regular class can extend a class and implement any number of interface simultaneously. But anonymous Inner class can extend a class or can implement an interface but not both at a time.
 For regular/normal class, we can write any number of constructors but we cant write any constructor for anonymous Inner class because anonymous class does not have any name and while defining constructor class name and constructor name must be same.
 
+
+\subsection{嵌套类}
+
+将内部类声明为static，内部类对象与其外围类对象之间则没有联系。
+
+1. 要创建嵌套类的对象，并不需要其外围类的对象。
+2. 不能从嵌套类的对象中访问非静态的外围类对象。
 
 
 

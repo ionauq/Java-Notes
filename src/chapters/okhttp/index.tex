@@ -1,3 +1,28 @@
 \chapter{OKHttp}
 \label{chap:okhttp}
 
+问题
+
+1. OKHttp是如何控制线程池的？
+2. OKHttp是如何确定超时机制的？
+3. 
+
+
+调度Dispatcher类
+
+ExecutorService 调度器
+
+readyAsyncCalls 准备异步调用的队列
+
+runningAsyncCalls 运行中的异步调用队列
+
+runningSyncCalls 运行中的同步调用的队列
+
+
+RealCall类  同步请求
+
+AsyncCall类 异步请求
+
+
+
+EventListener抽象类内部定义了一个函数式接口Factory

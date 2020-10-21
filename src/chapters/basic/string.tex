@@ -116,16 +116,53 @@ String对象是不可改变的，具有恒定性。
 
 \section{字符串常量池}
 
-
+\href{https://tech.meituan.com/2014/03/06/in-depth-understanding-string-intern.html}{深入解析String\#intern}
 
 
 \section{StringBuilder}
 
 
-String.format 和 MessageFormat.format区别
+\section{特殊注意事项}
+
+\subsection{String.format 和 MessageFormat.format区别}
 
 
-MessageFormat.format中传入long类型时问题
+\subsection{MessageFormat.format中传入long类型时问题}
+
+
+\subsection{String.split()使用单字符传入特殊符号时问题}
+
+\begin{lstlisting}[style=cjava]
+
+    /**
+    * Splits this string around matches of the given regular expression.
+    */
+    public String[] split(String regex);
+
+\end{lstlisting}
+
+regex 参数是正则表达式。如果使用单字符时并出现如下字符时一定要做转义，使用 \menlo{$\backslash$$\backslash$} 转义。
+
+\begin{lstlisting}[style=cjava]
+    . $ | ( ) [ { ^ ? * + \\
+\end{lstlisting}
+
+
+\begin{lstlisting}[style=cjava]
+
+    String origin = "a.b.c.d";
+    //错误使用
+    String[] errorArray = origin.split(".");
+    for (int i = 0; i < errorArray.length; i++) {
+        System.out.println(i);
+    }
+    //正确使用；使用\\转义
+    String[] rightArray = origin.split("\\.");
+    for (String s : rightArray) {
+        System.out.println(s);
+    }
+
+\end{lstlisting}
 
 
 
@@ -135,7 +172,10 @@ MessageFormat.format中传入long类型时问题
 
 
 
-https://tech.meituan.com/2014/03/06/in-depth-understanding-string-intern.html
+
+
+
+
 
 
 
