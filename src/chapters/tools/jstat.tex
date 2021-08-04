@@ -11,7 +11,7 @@ jstat [ generalOption | outputOptions vmid [ interval[s|ms] [ count ] ]
 \end{lstlisting}
 
 
-generalOption
+-generalOption
 
 单个通用命令行选项；可选参数为 -help 和 -options
 
@@ -55,3 +55,41 @@ outputOptions
     
 \end{itemize}
 
+
+-gc option
+
+\begin{itemize}
+    \item S0C: Current survivor space 0 capacity (kB).
+
+    \item S1C: Current survivor space 1 capacity (kB).
+    
+    \item S0U: Survivor space 0 utilization (kB).
+    
+    \item S1U: Survivor space 1 utilization (kB).
+    
+    \item EC: Current eden space capacity (kB).
+    
+    \item EU: Eden space utilization (kB).
+    
+    \item OC: Current old space capacity (kB).
+    
+    \item OU: Old space utilization (kB).
+    
+    \item MC: Metaspace capacity (kB).
+    
+    \item MU: Metacspace utilization (kB).
+    
+    \item CCSC: Compressed class space capacity (kB).
+    
+    \item CCSU: Compressed class space used (kB).
+    
+    \item YGC: Number of young generation garbage collection events.
+    
+    \item YGCT: Young generation garbage collection time.
+    
+    \item FGC: Number of full GC events.
+    
+    \item FGCT: Full garbage collection time.
+    
+    \item GCT: Total garbage collection time.
+\end{itemize}

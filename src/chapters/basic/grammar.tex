@@ -63,7 +63,26 @@ Java包含8种基本类型。\par
 \end{lstlisting}
 
 
-toBinaryString
+\subsubsection{整数类型操作}
+
+\begin{itemize}
+        \item   toBinaryString  将整数转为二进制位字符串
+        \item   bitCount        计算整数bit位为 1的个数
+        \item   ...
+    \end{itemize}
+
+\begin{lstlisting}[language=java]
+        System.out.println(Integer.toBinaryString(666));
+        System.out.println(Integer.toBinaryString(-1));
+        System.out.println(Integer.bitCount(0B10_10011010));
+
+        /**
+         * 1010011010
+         * 11111111111111111111111111111111
+         * 5
+         */
+\end{lstlisting}
+    
 
 
 \cautionbox{
@@ -132,18 +151,79 @@ double类型也可以添加d或者D后缀。
 
 \renewcommand\arraystretch{2}
 \begin{tabular}{l|l|l}
-    操作符    &     名称          &     说明                                                   \\   \hline
-    \~{}     &  Not（按位取反）   & 一元运算符   \quad 0变为1、将1变为0                            \\
-    \&       &   And（按位与）    & 二元运算符 \quad 两值全为1则为1 \quad 例：1\&1=1                \\
-    ｜       &   Or（按位或）     & 二元运算符 \quad 两值有1则为1 \quad 例： 0|1=1                  \\
-    \^{}     &   Xor（按位异或）  & 二元运算符 \quad 两值不相同则异或结果为1 \quad 例： 1\^{}0=1      \\
-    <<       &  左移位           & 二元运算符 \quad                                              \\
-    >>       &  右移位           & 二元运算符 \quad 符号运算符会填充高位                                \\ 
-    >>>      & 无符号右移位       & 二元运算符 \quad 运算符会用0填充高位                             \\
+    操作符    &     名称          &     说明                                                       \\   \hline
+    \~{}     &  Not（按位取反）   & 一元运算符   \quad 0变为1、将1变为0                                \\
+    \&       &   And（按位与）    & 二元运算符   \quad 两值全为1则为1 \quad 例：1\&1=1                 \\
+    ｜       &   Or（按位或）     & 二元运算符    \quad 两值有1则为1 \quad 例： 0|1=1                   \\
+    \^{}     &   Xor（按位异或）  & 二元运算符    \quad 两值不相同则异或结果为1 \quad 例： 1\^{}0=1       \\
+    <<       &  左移位           & 二元运算符    \quad                                               \\
+    >>       &  右移位           & 二元运算符    \quad 符号运算符会填充高位                             \\ 
+    >>>      & 无符号右移位       & 二元运算符    \quad 运算符会用0填充高位                              \\
 \end{tabular}\newline
 
 
-\textbf{移位}
+\subsubsection{移位}
+
+\begin{lstlisting}[language=java]
+        /**
+        * 下一个2的幂；普通性能
+        *
+        * @param numElements
+        * @return
+        */
+       public static int calculateSize(int numElements) {
+           int initialCapacity = 8;
+           while (initialCapacity < numElements) initialCapacity <<= 1;
+           return initialCapacity;
+       }
+   
+   
+       /*
+        * ArrayDeque 扩容原理;下一个2的幂;比上面的函数性能更好
+        */
+       private static int calculateSize(int numElements) {
+           int initialCapacity = 8;
+           // Find the best power of two to hold elements.
+           // Tests "<=" because arrays aren't kept full.
+           if (numElements >= initialCapacity) {
+               initialCapacity = numElements;
+               initialCapacity |= (initialCapacity >>> 1);
+               initialCapacity |= (initialCapacity >>> 2);
+               initialCapacity |= (initialCapacity >>> 4);
+               initialCapacity |= (initialCapacity >>> 8);
+               initialCapacity |= (initialCapacity >>> 16);
+               initialCapacity++;
+   
+               if (initialCapacity < 0)   // Too many elements, must back off
+                   initialCapacity >>>= 1;// Good luck allocating 2 ^ 30 elements
+           }
+           return initialCapacity;
+       }
+   
+\end{lstlisting}
+
+
+\subsubsection{与操作符}
+
+判断某个正数字是否为2的幂次方
+
+如果 N 与 N -1 相与则此数为2的幂次方
+
+\begin{lstlisting}[language=java]
+        /**
+        * 判断非零正整数是否为2的幂次方
+        * @param number
+        * @return
+        */
+       public boolean isPowerOfTwo(int number) {
+           if (number <= 0) {
+               return false;
+           }
+   
+           return (number & (number - 1)) == 0;
+       }
+
+\end{lstlisting}
 
 
 字节顺序
