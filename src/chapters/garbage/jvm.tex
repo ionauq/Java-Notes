@@ -1,0 +1,68 @@
+\chapter{JVM}
+\label{chap:JVM}
+
+
+部分收集（Partial GC）：指目标不是完整收集整个Java堆的垃圾收集
+
+新生代收集（Minor GC/Young GC）：指目标只是新生代的垃圾收集。
+
+老年代收集（Major GC/Old GC）：指目标只是老年代的垃圾收集。
+
+-XX:+<option>               启用 option
+
+-XX:-<option>               不启用 option
+
+-XX:<option>=<value>        设定 option 的值
+
+-XX:InitialHeapSize=size
+
+\renewcommand\arraystretch{2}
+\begin{tabular}{l|l|l}
+           参数                          &      说明                        &     其他       \\               \hline
+    -XX:+PrintFlagsFinal                &       获取所有可设置参数及值        &                \\
+    -XX:+UnlockExperimentalVMOptions    &       解锁实验参数                &                \\
+    -Xms                                &       初始时堆大小                &                \\
+    -Xmx                                &       堆最大值                   &                \\
+    -Xss                                &   栈内存容量（每个线程的堆栈大小）   &                \\
+    -XX:MaxMetaspaceSize                &   元空间的最大值                  &                \\
+    -verbose:gc                         &   显示每次GC垃圾回收时间的信息      &                \\
+    -XX:+PrintGC                        &   等同于 -verbose:gc             &                \\
+    -Xloggc                             &   GC日志存储文件                  &                   \\
+    -XX:+PrintGCDetails                 &   打印GC信息                     &                    \\
+    -XX:+PrintGCApplicationStoppedTime  &   打印垃圾回收期间程序暂停的时间     &                    \\
+    -XX:+PrintGCDateStamps              &   打印GC信息时显示日期             &                    \\
+    -XX:+PrintGCTimeStamps              &   打印GC信息时显示时间             &                    \\
+\end{tabular}\newline
+
+
+
+经典垃圾回收器
+
+
+Serial收集器
+
+ParNew收集器
+
+
+ParNew收集器实质上是Serial收集器的多线程并行版本
+
+ParNew收集器是激活CMS后（使用-XX：+UseConcMarkSweepGC选项）的默 认新生代收集器，也可以使用-XX：+/-UseParNewGC选项来强制指定或者禁用它。
+
+
+
+                
+
+    
+                               
+                                
+                                
+
+
+-XX:+PrintTenuringDistribution
+-XX:+PrintGCApplicationStoppedTime
+-XX:+PrintGCApplicationConcurrentTime
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:HeapDumpPath=path
+
+
+-Xloggc:/opt/app/gc.log
